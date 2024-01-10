@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/wswoodruff/robotictacos-site/issues"
   },
-  "homepage": "https://github.com/wswoodruff/robotictacos-site#readme"
+  "homepage": "https://github.com/wswoodruff/robotictacos-site#readme",
+  "dependencies": {
+    "three": "^0.160.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.11"
+  }
 }
