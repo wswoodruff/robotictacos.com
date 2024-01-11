@@ -1,12 +1,26 @@
+
+
+// https://discourse.threejs.org/t/error-relative-references-must-start-with-either-or/13573/19
+
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { DirectionalLight, AmbientLight,
-  BoxGeometry, MeshBasicMaterial, Mesh, MeshStandardMaterial, PlaneGeometry,
-  DoubleSide, AxesHelper, TextureLoader, RepeatWrapping, SRGBColorSpace, CameraHelper,
-  HemisphereLight, Vector3
-} from 'three';
+// import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+// import { OrbitControls } from 'https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+// import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
+
+
+// Find the latest version by visiting https://unpkg.com/three, currently it's 0.126.1
+
+
+// import { DirectionalLight, AmbientLight,
+//   BoxGeometry, MeshBasicMaterial, Mesh, MeshStandardMaterial, PlaneGeometry,
+//   DoubleSide, AxesHelper, TextureLoader, RepeatWrapping, SRGBColorSpace, CameraHelper,
+//   HemisphereLight, Vector3
+// } from 'https://unpkg.com/three@0.126.1/build/three.module.js';
+// } from 'three';
+
 
 
 let mouseYDelta = 0;
@@ -29,7 +43,7 @@ const height = aa.getBoundingClientRect().height;
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / height, 0.1, 1000 );
 camera.position.fromArray([1.4749013346022313, 2.5922112735946192, 1.7509439108807319]);
 camera.position.fromArray([0.8572659096940822, 1.6405420129153931, 2.9213720880347744]);
-camera.lookAt(new Vector3(0,-1,0));
+camera.lookAt(new THREE.Vector3(0,-1,0));
 window.cam = camera;
 
 const renderer = new THREE.WebGLRenderer();
@@ -49,11 +63,11 @@ const cube = new THREE.Mesh( geometry, material );
 
 
 
-    const ambientLight = new AmbientLight();
+    const ambientLight = new THREE.AmbientLight();
     ambientLight.intensity = 2.01;
     scene.add(ambientLight);
 
-    const sunLight = new DirectionalLight();
+    const sunLight = new THREE.DirectionalLight();
     sunLight.castShadow = true;
     // sunLight.position.set(2.5, 4, 0);
     // sunLight.position.set(2.5, 4, 12);
