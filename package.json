@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/wswoodruff/robotictacos-site#readme",
   "dependencies": {
+    "dist": "^0.1.2",
     "three": "^0.160.0"
   },
   "devDependencies": {
+    "gh-pages": "^6.1.1",
     "vite": "^5.0.11"
   }
 }
