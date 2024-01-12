@@ -16,8 +16,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 
 
-    <script type="module" crossorigin src="/assets/index-R33VJ3D7.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-MlcCE9vO.css">
+    <!-- defaulting to a plugin for now for some quick effects -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+
+    <script type="module" crossorigin src="/assets/index--bQ4QdtI.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-aMW6SN1m.css">
   </head>
   <body>
     
@@ -74,10 +78,10 @@
                 </article>
                 
                 <div class="vidwrapper">
-                <!-- <picture style="background-image: url('./images/vr1.jpg')"></picture> -->
-                <video asdfsdfcontrols="false" muted="true" autoplay="true" loop class="funky">
-                  <source src="https://cdn.glitch.global/a4a18359-54bf-415e-86f0-691a7faa51bf/vr1.mp4" type="video/mp4" />
-                    Your browser does not support the video tag guesses.
+                  <!-- <picture style="background-image: url('./images/vr1.jpg')"></picture> -->
+                  <video asdfsdfcontrols="false" muted="true" autoplay="true" loop class="funky">
+                    <source src="https://cdn.glitch.global/a4a18359-54bf-415e-86f0-691a7faa51bf/vr1.mp4" type="video/mp4" />
+                      Your browser does not support the video tag guesses.
                   </video>
                 </div>
               
@@ -101,11 +105,12 @@
                   </ul>
                 </article>
                 
-                
+                <div class="vidwrapper2">
                 <video asdfsdfcontrols="false" muted="true" autoplay="true" loop class="iphone">
                   <source src="https://cdn.glitch.global/a4a18359-54bf-415e-86f0-691a7faa51bf/iphone1.mp4?v=1705020740668" type="video/mp4" />
                     Your browser does not support the video tag guesses.
                   </video> 
+                </div>
                 
                   
                   
@@ -117,7 +122,7 @@
 
 
                 
-              <div id="heroplacethingwideview" class="">
+              <div id="heroplacethingwideview" class="" style="display:none;">
                 
                 <video asdfsdfcontrols="false" muted="true" autoplay="true">
                   <source src="https://cdn.glitch.me/6190f662-c2d1-49f4-acdf-4a8ce71e49d7/reel_cut_8_sm.mp4#t=10,20" type="video/mp4" />
@@ -125,7 +130,7 @@
                   </video> 
               </div>
                 
-              <div id="sdfdfgdf" class="">
+              <div id="sdfdfgdf" class="" style="display:none;">
                 
                 
                 
@@ -421,6 +426,37 @@
         
       </div>
 
+      <script type="text/javascript">
+        // ScrollReveal().reveal('.item-type-1 article', { delay: 500 });
+        ScrollReveal().reveal('.item-type-1 .vidwrapper', { 
+          delay: 200, 
+          duration: 500,
+          distance: '40%',
+          origin: 'bottom',
+          easing: 'ease-out',
+          // reset: true
+        });
+        ScrollReveal().reveal('.item-type-1 .vidwrapper2', { 
+          delay: 200, 
+          duration: 500,
+          distance: '40%',
+          origin: 'bottom',
+          easing: 'ease-out',
+          // reset: true
+        });
+        
+        ScrollReveal().reveal('.item-type-1 article', { 
+          delay: 20, 
+          duration: 800,
+          distance: '40%',
+          origin: 'right',
+          easing: 'ease-in-out',
+          // reset: true
+        });
+
+      </script>
+    
+    
     
   </body>
 </html>
