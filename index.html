@@ -120,6 +120,7 @@
 
 
 
+
                 
               <div id="heroplacethingwideview" class="" style="display:none;">
                 
@@ -425,6 +426,22 @@
         
       </div>
 
+
+      
+      <div id="videowall">
+        
+        <!-- <video asdfsdfcontrols="false" muted="true" autoplay="true" loop class="sdfsdfgdsgiphone">
+          <source src="./videos/3dthing1.mp4" type="video/mp4" />
+            Your browser does not support the video tag guesses.
+        </video> 
+         -->
+
+        
+      </div>
+
+
+
+
       <script type="module" src="./js/mainforabit.js"></script>
       <script type="text/javascript">
         // ScrollReveal().reveal('.item-type-1 article', { delay: 500 });
@@ -434,7 +451,7 @@
           distance: '40%',
           origin: 'bottom',
           easing: 'ease-out',
-          reset: true
+          reset: false
         });
         ScrollReveal().reveal('.item-type-1 .vidwrapper2', { 
           delay: 200, 
@@ -442,7 +459,7 @@
           distance: '40%',
           origin: 'bottom',
           easing: 'ease-out',
-          reset: true
+          reset: false
         });
         
         ScrollReveal().reveal('.item-type-1 article', { 
@@ -451,8 +468,75 @@
           distance: '40%',
           origin: 'right',
           easing: 'ease-in-out',
-          reset: true
+          reset: false
         });
+
+
+        // 
+        // build video wall
+        // 
+        const _videowall = document.getElementById("videowall");
+        const videonames = [
+          '3dthing1',
+          'ar1',
+          'arshoe1',
+          'atractor1',
+          'ball1',
+          'ball1vr2',
+          'candystar',
+          'circles_a',
+          'colors1',
+          'cubes_a',
+          'dino',
+          'gamegrid1',
+          'infinigame1',
+          'kindaai',
+          'notgolf',
+          'shaders1',
+          'starpower',
+          'straighttalk',
+          'treesdups',
+          'trixel',
+          // 'vr1',
+          'vr4',
+          'vrcandy1',
+          'vrcity',
+          'vrfilterness',
+          'vrhand234',
+          'vrheart',
+          'vrkelp',
+          'vrmultihands',
+          'vrtalk',
+          'wexar',
+          'wexar_b',
+          'wuirst'
+        ];
+        
+        videonames.sort(() => (Math.random() > .5) ? 1 : -1);
+        
+        for (var ii = 0; ii < videonames.length; ii++) {
+          const aa = document.createElement('video');
+          aa.muted = true;
+          aa.autoplay = true;
+          aa.loop = true;
+          aa.classList.add("sdlkfngdfg");
+          
+          var sourceMP4 = document.createElement("source"); 
+          sourceMP4.type = "video/mp4";
+          sourceMP4.src = `./videos/${videonames[ii]}.mp4`;
+          aa.appendChild(sourceMP4);
+          
+          _videowall.appendChild(aa);
+          
+
+        }
+        
+        // <video asdfsdfcontrols="false" muted="true" autoplay="true" loop class="sdfsdfgdsgiphone">
+        //   <source src="./videos/atractor1.mp4" type="video/mp4" />
+        //     Your browser does not support the video tag guesses.
+        // </video> 
+
+
 
       </script>
     

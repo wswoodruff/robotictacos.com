@@ -134,7 +134,7 @@ for (var i = 0; i < 8; i++) {
 
 document.addEventListener("wheel", (event) => {
 // renderer.domElement.addEventListener("wheel", (event) => {
-  console.log(event.deltaY );
+  // console.log(event.deltaY );
   mouseYDelta += event.deltaY;
   // animate();
 });
