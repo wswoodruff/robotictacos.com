@@ -16,8 +16,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 
 
-    <script type="module" crossorigin src="./assets/index-3QdrJbe_.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-lLnimZb9.css">
+    <!-- defaulting to a plugin for now for some quick effects -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+
+    <script type="module" crossorigin src="/assets/index-CYWlOFqC.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-sIHrVhKv.css">
   </head>
   <body>
     
@@ -62,6 +66,7 @@
               <section class="item-type-1">
                 
                 <article>
+                  
                   <h2>SPACEMittens</h2>
                   <ul>
                     <li>Full developer for VR Networked dance party in VR built in Unity</li>
@@ -72,7 +77,13 @@
                   </ul>
                 </article>
                 
-                <picture style="background-image: url('./assets/vr1-D0Hch0Lw.jpg')"></picture>
+                <div class="vidwrapper">
+                  <!-- <picture style="background-image: url('./images/vr1.jpg')"></picture> -->
+                  <video asdfsdfcontrols="false" muted="true" autoplay="true" loop class="funky">
+                    <source src="https://cdn.glitch.global/a4a18359-54bf-415e-86f0-691a7faa51bf/vr1.mp4" type="video/mp4" />
+                      Your browser does not support the video tag guesses.
+                  </video>
+                </div>
               
               </section>
 
@@ -94,22 +105,33 @@
                   </ul>
                 </article>
                 
-                <picture style="background-image: url('./assets/iphone1-07g5ajlQ.jpg')"></picture>
+                <div class="vidwrapper2">
+                <video asdfsdfcontrols="false" muted="true" autoplay="true" loop class="iphone">
+                  <source src="https://cdn.glitch.global/a4a18359-54bf-415e-86f0-691a7faa51bf/iphone1.mp4?v=1705020740668" type="video/mp4" />
+                    Your browser does not support the video tag guesses.
+                  </video> 
+                </div>
+                
+                  
+                  
+                <!-- <picture style="background-image: url('./images/iphone1.jpg')"></picture> -->
+                
               
               </section>
 
 
 
+
                 
-              <div id="heroplacethingwideview" class="">
+              <div id="heroplacethingwideview" class="" style="display:none;">
                 
-                <video controls="">
-                  <source src="https://cdn.glitch.me/6190f662-c2d1-49f4-acdf-4a8ce71e49d7/reel_cut_8_sm.mp4?v=1680249558480" type="video/mp4">
+                <video asdfsdfcontrols="false" muted="true" autoplay="true">
+                  <source src="https://cdn.glitch.me/6190f662-c2d1-49f4-acdf-4a8ce71e49d7/reel_cut_8_sm.mp4#t=10,20" type="video/mp4" />
                     Your browser does not support the video tag guesses.
                   </video> 
               </div>
                 
-              <div id="sdfdfgdf" class="">
+              <div id="sdfdfgdf" class="" style="display:none;">
                 
                 
                 
@@ -405,6 +427,120 @@
         
       </div>
 
+
+      
+      <div id="videowall">
+        
+        <!-- <video asdfsdfcontrols="false" muted="true" autoplay="true" loop class="sdfsdfgdsgiphone">
+          <source src="./videos/3dthing1.mp4" type="video/mp4" />
+            Your browser does not support the video tag guesses.
+        </video> 
+         -->
+
+        
+      </div>
+
+
+
+
+      <script type="text/javascript">
+        // ScrollReveal().reveal('.item-type-1 article', { delay: 500 });
+        ScrollReveal().reveal('.item-type-1 .vidwrapper', { 
+          delay: 200, 
+          duration: 500,
+          distance: '40%',
+          origin: 'bottom',
+          easing: 'ease-out',
+          reset: false
+        });
+        ScrollReveal().reveal('.item-type-1 .vidwrapper2', { 
+          delay: 200, 
+          duration: 500,
+          distance: '40%',
+          origin: 'bottom',
+          easing: 'ease-out',
+          reset: false
+        });
+        
+        ScrollReveal().reveal('.item-type-1 article', { 
+          delay: 20, 
+          duration: 800,
+          distance: '40%',
+          origin: 'right',
+          easing: 'ease-in-out',
+          reset: false
+        });
+
+
+        // 
+        // build video wall
+        // 
+        const _videowall = document.getElementById("videowall");
+        const videonames = [
+          '3dthing1',
+          'ar1',
+          'arshoe1',
+          'atractor1',
+          'ball1',
+          'ball1vr2',
+          'candystar',
+          'circles_a',
+          'colors1',
+          'cubes_a',
+          'dino',
+          'gamegrid1',
+          'infinigame1',
+          'kindaai',
+          'notgolf',
+          'shaders1',
+          'starpower',
+          'straighttalk',
+          'treesdups',
+          'trixel',
+          // 'vr1',
+          'vr4',
+          'vrcandy1',
+          'vrcity',
+          'vrfilterness',
+          'vrhand234',
+          'vrheart',
+          'vrkelp',
+          'vrmultihands',
+          'vrtalk',
+          'wexar',
+          'wexar_b',
+          'wuirst'
+        ];
+        
+        videonames.sort(() => (Math.random() > .5) ? 1 : -1);
+        
+        for (var ii = 0; ii < videonames.length; ii++) {
+          const aa = document.createElement('video');
+          aa.muted = true;
+          aa.autoplay = true;
+          aa.loop = true;
+          aa.classList.add("sdlkfngdfg");
+          
+          var sourceMP4 = document.createElement("source"); 
+          sourceMP4.type = "video/mp4";
+          sourceMP4.src = `./videos/${videonames[ii]}.mp4`;
+          aa.appendChild(sourceMP4);
+          
+          _videowall.appendChild(aa);
+          
+
+        }
+        
+        // <video asdfsdfcontrols="false" muted="true" autoplay="true" loop class="sdfsdfgdsgiphone">
+        //   <source src="./videos/atractor1.mp4" type="video/mp4" />
+        //     Your browser does not support the video tag guesses.
+        // </video> 
+
+
+
+      </script>
+    
+    
     
   </body>
 </html>
