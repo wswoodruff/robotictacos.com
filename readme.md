@@ -1,2 +1,5 @@
-npx vite
-npx vite build
+# robotictacos.com
+
+- npm install
+- npm run build
+- npm run deploy
