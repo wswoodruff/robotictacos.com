@@ -7,7 +7,8 @@ export default {
                 { src: 'images', dest: '.' },
                 { src: 'models', dest: '.' },
                 { src: 'svgs', dest: '.' },
-                { src: 'videos', dest: '.' }
+                { src: 'videos', dest: '.' },
+                { src: 'CNAME', dest: '.' }
             ]
         })
     ]
