@@ -3,11 +3,8 @@
   "version": "0.0.1",
   "description": "robotictacos.com",
   "main": "build/index.html",
-  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "vite build",
-    "deploy": "git subtree push --prefix dist origin gh-pages"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -25,7 +22,6 @@
   },
   "devDependencies": {
     "gh-pages": "^6.1.1",
-    "vite": "^5.0.11",
-    "vite-plugin-static-copy": "^1.0.0"
+    "vite": "^5.0.11"
   }
 }
