@@ -21,7 +21,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 // } from 'https://unpkg.com/three@0.126.1/build/three.module.js';
 // } from 'three';
 
-
+var orbit;
 
 let mouseYDelta = 0;
 
@@ -51,7 +51,7 @@ function enableShadowsObject(object) {
 
 export async function inininint() {
   
-
+  window.THREE = THREE;
 
   const scene = new THREE.Scene();
   // scene.fog = new THREE.Fog( scene.background, 1, 5000 );
@@ -61,9 +61,14 @@ export async function inininint() {
   const height = aa.getBoundingClientRect().height;
   // window.innerHeight
   const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / height, 0.1, 2000 );
-  camera.position.fromArray([0,20,40]);
+  // camera.position.fromArray([0,24,40]);
+  // camera.position.fromArray([0, 24.770988266535532, 38.8329249239593]);
+  camera.position.fromArray([0, 21.22465751184184, 40.4622033919508]);
   // camera.position.fromArray([0.8572659096940822, 1.6405420129153931, 2.9213720880347744]);
-  camera.lookAt(new THREE.Vector3(0,0,0));
+  // camera.lookAt(new THREE.Vector3(0,0,0));
+  camera.lookAt(new THREE.Vector3(0,0,0).fromArray([0.00859148296684644, -0.24372632714083164, -0.9698059929072776]).multiplyScalar(1));
+  // camera.lookAt(new THREE.Vector3(0,0,0).fromArray([-0.002380159629899302, -0.17895685250015073, -0.9838540439431938]).multiplyScalar(1));
+  // camera.lookAt(new THREE.Vector3(200,4,0));
   window.cam = camera;
 
   const renderer = new THREE.WebGLRenderer({antialias:true});
@@ -72,12 +77,16 @@ export async function inininint() {
   renderer.setSize( window.innerWidth, aa.getBoundingClientRect().height );
   aa.appendChild( renderer.domElement );
   
+  THREE.ColorManagement.enabled = false;
+  // THREE.ColorManagement.enabled = true;
+  
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
 
 
-  const orbit = new OrbitControls( camera, renderer.domElement );
-  // orbit.enableZoom = false;
+  orbit = new OrbitControls( camera, renderer.domElement );
+  orbit.enableZoom = false;
+  // orbit.enabled = false;
 
   const geometry = new THREE.BoxGeometry( 1, 1, 1 );
   const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
@@ -91,7 +100,7 @@ export async function inininint() {
   // scene.add( light );
 
 
-	const hemiLight = new THREE.HemisphereLight( 0x421200, 0x5cdeff, 1 );
+	const hemiLight = new THREE.HemisphereLight( 0x421200, 0x5cdeff, 12 );
 	// hemiLight.color.setHSL( 0.6, 1, 0.6 );
 	// hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
 	// hemiLight.position.set( 0, 50, 0 );
@@ -107,13 +116,16 @@ export async function inininint() {
 	const fragmentShader = document.getElementById( 'fragmentShader' ).textContent;
 	const uniforms = {
 		// 'topColor': { value: new THREE.Color( 0x0077ff ) },
-		'topColor': { value: new THREE.Color( 0x00c4f5 ) },
+		// 'topColor': { value: new THREE.Color( 0x00c4f5 ) },
+		// 'topColor': { value: new THREE.Color( 0xa3e7ff ) },
+		'topColor': { value: new THREE.Color( 0xadd5ff ) },
 		// 'bottomColor': { value: new THREE.Color( 0xffffff ) },
-		'bottomColor': { value: new THREE.Color( 0xffffff ) },
-		'offset': { value: 1 },
-		'exponent': { value: 0.6 }
+		// 'bottomColor': { value: new THREE.Color( 0x2e0004 ) },
+		'bottomColor': { value: new THREE.Color( 0xebfcff ) },
+		'offset': { value: -1.1 },
+		'exponent': { value: 0.4 }
 	};
-	uniforms[ 'topColor' ].value.copy( hemiLight.color );
+	// uniforms[ 'topColor' ].value.copy( hemiLight.color );
 
 	// scene.fog.color.copy( uniforms[ 'bottomColor' ].value );
 
@@ -126,23 +138,19 @@ export async function inininint() {
 	} );
 
 	const sky = new THREE.Mesh( skyGeo, skyMat );
-	// scene.add( sky );
+	scene.add( sky );
 
 
   const ambientLight = new THREE.AmbientLight();
-  ambientLight.intensity = 2.01;
+  ambientLight.intensity = 1.81;
   scene.add(ambientLight);
 
   const sunLight = new THREE.DirectionalLight();
   sunLight.castShadow = true;
-  // sunLight.position.set(2.5, 4, 0);
-  // sunLight.position.set(2.5, 4, 12);
-  // sunLight.position.set(1, 1, 0);
-  // sunLight.position.copy({x: 1.2, y: 1, z: 0.2});
-  sunLight.position.copy({x: -4.2, y: 3, z: 10.2});
+  sunLight.position.copy({x: -4.2, y: 6, z: 12.2});
   sunLight.intensity = 4.7;
   // sunLight.color.setHex(0xffff80);
-  sunLight.color.setHex(0xfffff);
+  sunLight.color.setHex(0xffffff);
   scene.add(sunLight);
 
   //Set up shadow properties for the light
@@ -150,8 +158,10 @@ export async function inininint() {
   sunLight.shadow.mapSize.height = 512 * 1;
   sunLight.shadow.camera.near = 0.5;
   sunLight.shadow.camera.far = 200;
+  
   sunLight.shadow.bias = 0.00001;
-  sunLight.shadow.radius = 0.00001;
+  sunLight.shadow.bias = 0.000001;
+  sunLight.shadow.radius = 0.001;
 
   // see link for more https://stackoverflow.com/a/56015860
   // and need it to be in 3d space instead of vector space
@@ -167,8 +177,6 @@ export async function inininint() {
   var shadowHelper = new THREE.CameraHelper( sunLight.shadow.camera );
   scene.add( shadowHelper );
 
-  // this.sunLight = sunLight;
-  
 
   window.addEventListener( 'resize', onWindowResize );
   function onWindowResize() {
@@ -282,7 +290,9 @@ export async function inininint() {
 
   function animate() {
   	requestAnimationFrame( animate );
-    orbit.update();
+    if(orbit !== undefined){
+      orbit.update();
+    }
     // for (var i = 0; i < animals.length; i++) {
     //   let gg = animals[i];
     //   gg.rotation.y =  (i * 0.2) + mouseYDelta * 0.1 ;

@@ -9,7 +9,8 @@ export default {
                 { src: './models', dest: '.' },
                 { src: './videos', dest: '.' },
                 { src: './svgs', dest: '.' },
-                { src: './images', dest: '.' }
+                { src: './images', dest: '.' },
+                { src: 'indextacos.html', dest: '.' },
             ]
         })
     ]
