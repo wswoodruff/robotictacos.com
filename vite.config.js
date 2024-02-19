@@ -6,6 +6,9 @@ export default {
         Copy({
             targets: [
                 { src: './CNAME', dest: '.' },
+                { src: './videos', dest: '.' },
+                { src: './svgs', dest: '.' },
+                { src: './images', dest: '.' }
             ]
         })
     ]
