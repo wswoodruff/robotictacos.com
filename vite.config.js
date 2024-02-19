@@ -1,4 +1,12 @@
 // vite.config.js
+import { viteStaticCopy as Copy } from 'vite-plugin-static-copy'
+
 export default {
-    // config options
+    plugins: [
+        Copy({
+            targets: [
+                { src: './CNAME', dest: '.' },
+            ]
+        })
+    ]
 }

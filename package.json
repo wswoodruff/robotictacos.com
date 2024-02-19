@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "robotictacos.com",
   "main": "build/index.html",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "vite build --config ./vite.config.js",
@@ -20,7 +21,8 @@
   "homepage": "https://github.com/wswoodruff/robotictacos-site#readme",
   "dependencies": {
     "dist": "^0.1.2",
-    "three": "^0.160.0"
+    "three": "^0.160.0",
+    "vite-plugin-static-copy": "^1.0.1"
   },
   "devDependencies": {
     "gh-pages": "^6.1.1",
