@@ -6,5 +6,7 @@ requires you create a new token
 - npm run build
 - npm run deploy
 
-<!-- npx vite -->
-<!-- npx vite build -->
+npx vite
+npx vite build
+
+https://github.com/wswoodruff/robotictacos.com/actions
