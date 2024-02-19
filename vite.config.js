@@ -9,9 +9,18 @@ export default {
                 { src: './models', dest: '.' },
                 { src: './videos', dest: '.' },
                 { src: './svgs', dest: '.' },
-                { src: './images', dest: '.' },
-                { src: 'indextacos.html', dest: '.' },
+                { src: './images', dest: '.' }
             ]
         })
-    ]
+    ],
+    build: {
+      rollupOptions: {
+        input: {
+          main: './index.html',
+          tacos: './indextacos.html',
+          // ...
+          // List all files you want in your build
+        }
+      }
+    }
 }
