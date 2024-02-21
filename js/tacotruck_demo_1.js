@@ -5,6 +5,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { Tile, TilesController } from './utils/tiles.js';
+import { SphereMesh } from './utils/sphereMesh.js';
 
 // import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 // import { OrbitControls } from 'https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js';
@@ -34,6 +36,8 @@ var tacocar1 = null;
 var streetplatesOriginal = null;
 const streetplates = [];
 const streetplateBox = new THREE.Box3();
+
+var streetTiles1 = null;
 
 // inininint();
 
@@ -77,15 +81,20 @@ export async function inininint() {
   renderer.setSize( window.innerWidth, aa.getBoundingClientRect().height );
   aa.appendChild( renderer.domElement );
   
-  THREE.ColorManagement.enabled = false;
+  // THREE.ColorManagement.enabled = false;
   // THREE.ColorManagement.enabled = true;
   
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
 
+  // renderer.outputColorSpace = THREE.sRGBEncoding
+  // renderer.outputColorSpace = THREE.NoColorSpace;
+  // renderer.outputColorSpace = THREE.SRGBColorSpace;
+  // renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
+  // renderer.outputColorSpace = THREE.NoColorSpace;
 
   orbit = new OrbitControls( camera, renderer.domElement );
-  orbit.enableZoom = false;
+  // orbit.enableZoom = false;
   // orbit.enabled = false;
 
   const geometry = new THREE.BoxGeometry( 1, 1, 1 );
@@ -148,7 +157,7 @@ export async function inininint() {
   const sunLight = new THREE.DirectionalLight();
   sunLight.castShadow = true;
   sunLight.position.copy({x: -4.2, y: 6, z: 12.2});
-  sunLight.intensity = 4.7;
+  sunLight.intensity = 2.7;
   // sunLight.color.setHex(0xffff80);
   sunLight.color.setHex(0xffffff);
   scene.add(sunLight);
@@ -175,7 +184,7 @@ export async function inininint() {
   sunLight.shadow.camera.right = -side;
 
   var shadowHelper = new THREE.CameraHelper( sunLight.shadow.camera );
-  scene.add( shadowHelper );
+  // scene.add( shadowHelper );
 
 
   window.addEventListener( 'resize', onWindowResize );
@@ -210,30 +219,96 @@ export async function inininint() {
   // }
   
   {
-    var result = await new GLTFLoader().loadAsync("../models/tacocar/streetplate2.glb");
+    var result = await new GLTFLoader().loadAsync("../models/tacocar/streetplate3.glb");
     let model1 = result.scene;
-    scene.add(model1);
+    // scene.add(model1);
     // result.scene.position.setScalar(0,0,0);
     streetplatesOriginal = model1;
-    streetplatesOriginal.visible = false;
     
-    let box = streetplateBox;
-    // const box = new THREE.Box3();
-    box.setFromObject(streetplatesOriginal);
-    // console.log(box);
-    // window.bb = box;
-    const vv = new THREE.Vector3();
-    box.getSize(vv);
-    let padding = -4.2;
-    let pos = streetplatesOriginal.position.clone();
-    for (var ii = 0; ii < 2; ii++) {
-      let gg = streetplatesOriginal.clone();
-      gg.visible = true;
-      gg.position.copy(pos);
-      gg.position.x = (vv.x + padding) * ii;
-      scene.add(gg);
-      streetplates.push(gg);
-    }
+//     const box = new THREE.Box3();
+//     box.setFromObject(streetplatesOriginal)
+// const helper = new THREE.Box3Helper( box, 0x00aaff );
+// scene.add( helper );
+
+    // streetplatesOriginal.visible = false;
+    
+    // let box = streetplateBox;
+    // // const box = new THREE.Box3();
+    // box.setFromObject(streetplatesOriginal);
+    // // console.log(box);
+    // // window.bb = box;
+    // const vv = new THREE.Vector3();
+    // box.getSize(vv);
+    // let padding = -4.2;
+    // let pos = streetplatesOriginal.position.clone();
+    // for (var ii = 0; ii < 2; ii++) {
+    //   let gg = streetplatesOriginal.clone();
+    //   gg.visible = true;
+    //   gg.position.copy(pos);
+    //   gg.position.x = (vv.x + padding) * ii;
+    //   scene.add(gg);
+    //   streetplates.push(gg);
+    //   gg.visible = false;
+    // }
+    
+    // let streetTiles1Group = new THREE.Group();
+    // scene.add(streetTiles1Group);
+    
+    streetTiles1 = new TilesController();
+    scene.add(streetTiles1);
+    streetTiles1.position.z = 20;
+    window.streetTiles1 = streetTiles1;
+    
+    let rr = new Tile({item:streetplatesOriginal.clone(), paddingLeft:2.4, paddingRight:-1.2, showDebugger:true});
+    streetTiles1.addHorizontal(rr)
+    rr.name = "111";
+    rr.position.x += -40;
+    // rr.position.z = 20;
+    
+    let gg1 = new SphereMesh({color:0xffff00, radius: 6});
+    rr.add(gg1);
+    gg1.position.y = 22;
+    
+    
+//     const box2 = new THREE.Box3();
+//     box2.setFromObject(rr)
+// const helper2 = new THREE.Box3Helper( box2, 0xaaaaff );
+// scene.add( helper2 );
+    
+    
+    
+    let rr2 = new Tile({item:streetplatesOriginal.clone(), paddingLeft:2.4, paddingRight:-1.2, showDebugger:true});
+    streetTiles1.addHorizontal(rr2)
+    rr2.name = "222";
+    rr2.position.x += 40;
+    
+    let gg2 = new SphereMesh({color:0x00eeee, radius: 6});
+    rr2.add(gg2);
+    gg2.position.y = 22;
+    
+    
+    
+    
+    let rr3 = new Tile({item:streetplatesOriginal.clone(), paddingLeft:2.4, paddingRight:-1.2, showDebugger:true});
+    streetTiles1.addHorizontal(rr3)
+    rr3.name = "222";
+    rr3.position.x += 80;
+    
+    let gg3 = new SphereMesh({color:0xffeeee, radius: 6});
+    rr3.add(gg3);
+    gg3.position.y = 22;
+    
+    
+    streetTiles1.snapAllInOrder();
+    
+    // streetTiles1.snap(streetTiles1.horizontal[0], streetTiles1.horizontal[1], "east", "west" );
+    // streetTiles1.snap(streetTiles1.horizontal[0], streetTiles1.horizontal[1], "west", "east" );
+    
+    
+    
+    // let glglh = new SphereMesh({radius : 2, color:0x0000ff});
+    // scene.add(glglh)
+    
   }
   
   
@@ -285,6 +360,27 @@ export async function inininint() {
     // console.log(event.deltaY );
     mouseYDelta += event.deltaY;
     // animate();
+  });
+  
+  // https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
+  document.addEventListener("keydown", (event) => {
+    // if (event.key === "a") {
+    //   console.log("a");
+    //   streetTiles1.snap(streetTiles1.horizontal[0], streetTiles1.horizontal[1], "west", "east" );
+    // }
+    // if (event.key === "s") {
+    //   console.log("s");
+    //   streetTiles1.snap(streetTiles1.horizontal[0], streetTiles1.horizontal[1], "east", "west" );
+    // }
+    if (event.key === "z") {
+      console.log("z");
+      streetTiles1.snapFrontToBack();
+    }
+    if (event.key === "x") {
+      console.log("z");
+      streetTiles1.snapBackToFront();
+    }
+    // do something
   });
 
 
