@@ -1,8 +1,10 @@
-import { store } from 'alexandria/store';
+// import { store } from 'alexandria/store';
 
 // basic ecs basicecs
 
 /*
+
+animationPool.add( objectThatHasEntites );
 
 // TODO can move this into an animationSystem and fit into the above pipeline()
 for (var i = 0; i < st.animationPool.length; i++) {

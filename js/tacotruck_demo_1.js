@@ -8,6 +8,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Tile, TilesController } from './utils/tiles.js';
 import { SphereMesh } from './utils/sphereMesh.js';
 
+import { CheapPool } from './utils/cheapPool.js';
+
 // import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 // import { OrbitControls } from 'https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 // import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
@@ -38,6 +40,8 @@ const streetplates = [];
 const streetplateBox = new THREE.Box3();
 
 var streetTiles1 = null;
+
+const animationPool = new CheapPool();
 
 // inininint();
 
@@ -258,6 +262,8 @@ export async function inininint() {
     scene.add(streetTiles1);
     streetTiles1.position.z = 20;
     window.streetTiles1 = streetTiles1;
+    animationPool.add(streetTiles1)
+    
     
     let rr = new Tile({item:streetplatesOriginal.clone(), paddingLeft:2.4, paddingRight:-1.2, showDebugger:true});
     streetTiles1.addHorizontal(rr)
@@ -374,15 +380,20 @@ export async function inininint() {
     // }
     if (event.key === "z") {
       console.log("z");
-      streetTiles1.snapFrontToBack();
+      streetTiles1.snapFrontToBack(true);
     }
     if (event.key === "x") {
       console.log("z");
-      streetTiles1.snapBackToFront();
+      // streetTiles1.snapBackToFront();
+      streetTiles1.snapBackToFront(true);
     }
     // do something
   });
 
+
+  // 
+  // LOOP
+  // 
 
   function animate() {
   	requestAnimationFrame( animate );
@@ -400,6 +411,14 @@ export async function inininint() {
     
     if(tacocar1){
       tacocar1.position.x += 0.1;
+    }
+    
+    // basic Entities ecs system
+    for (var i = 0; i < animationPool.length; i++) {
+      
+      let pick = animationPool[i];
+      pick.entities.run();
+
     }
     
   	renderer.render( scene, camera );
