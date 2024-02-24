@@ -52,3 +52,16 @@ export function remapNegPositiveOne(from0, to0, value) {
 export function isPowerOf2(value) {
   return (value & (value - 1)) === 0;
 }
+
+// within
+export function isBetween(val,min,max){
+	if (val >= min && val <= max) return true;
+	return false;
+}
+
+// this expects a Box3 or Box2
+// export function isBetweenWidth(item,item2) {
+// 	if (item.min) {
+// 
+// 	}
+// }

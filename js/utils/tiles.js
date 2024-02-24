@@ -1,8 +1,12 @@
-// if(store.state.keyboard.keys.w) {
-//   this.translateZ( 0.1 );
-// }
 
-import {Group, Box3, Vector3, Clock } from 'three';
+// Tiles controller and tile class
+// controls the tiles and their snapping
+// Car though is another layer, not sure where that goes
+
+
+import { Group, Box3, Vector3, Clock, MeshStandardMaterial, 
+  MeshBasicMaterial, Mesh, AxesHelper } from 'three';
+  
 import {SphereMesh} from './sphereMesh.js';
 
 import { CheapPool } from './cheapPool.js';
@@ -11,6 +15,7 @@ import { Entities, Enty } from './basicEntites.js';
 import { clamp, lerp } from './mathness.js';
 import { bellCurve1 } from './curves.js';
 
+import {PatchObject3D} from "./patchObject3D.js"
 
 const vv1 = new Vector3();
 const vv2 = new Vector3();
@@ -19,7 +24,10 @@ const pos = new Vector3();
 const localB = new Vector3();
 const v345 = new Vector3();
 
-export class TilesController extends Group {
+export class TilesController extends PatchObject3D {
+  
+  isTilesController = true;
+  
   vertical = new CheapPool();
   horizontal = new CheapPool();
   
@@ -138,11 +146,17 @@ export class TilesController extends Group {
 }
 
 
+
+// 
+// Tile
+// 
+
+
 const box = new Box3();
 const vv = new Vector3();
 
 
-export class Tile extends Group{
+export class Tile extends PatchObject3D{
   isTile = true;
   verticalPoints = []; // 0 left
   horizontalPoints = [];
@@ -154,17 +168,18 @@ export class Tile extends Group{
   up=null;
   down=null;
   
-  constructor({item, paddingLeft=0, paddingRight=0, showDebugger=false}={}){
+  constructor({item, paddingLeft=0, paddingRight=0, showDebugger=false }={}){
     super();
     item.position.set(0,0,0);
     item.rotation.set(0,0,0);
     item.updateMatrix();
     
-    window.pw = this;
+    // window.pw = this;
     
     // swap out objects IF its the first time model is loaded
     if(item){
       for (var i = 0; i < item.children.length; i++) {
+        item.children[i].position.setScalar(0);
         this.add(item.children[i]);
       }
     }
@@ -195,8 +210,21 @@ export class Tile extends Group{
     // this.verticalPoints[0].position.;
     // this.verticalPoints[0].position.x = vv.x;
     
+
+
   }
 }
+
+
+
+
+
+
+// 
+// Walk entity
+// 
+// 
+
 
 
 const walkV = new Vector3();
@@ -206,12 +234,14 @@ export class Walk extends Enty {
     // document.addEventListener( 'mousemove', onDocumentMouseMove );
     // document.addEventListener("keydown", (event) => this.stuff.bind(owner, event) );
   }
-  constructor(name="walk"){
+  constructor({name, }={}){
     super(name);
     // debugger
     // these wont read due to the .call above
     // this.walkSpeed = walkSpeed;
     // this.spinSpeed = spinSpeed;
+
+    
   }
 
   update() {
