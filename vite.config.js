@@ -18,6 +18,7 @@ export default {
         input: {
           main: './index.html',
           tacos: './indextacos.html',
+          rock: './indexrock.html',
           // ...
           // List all files you want in your build
         }
