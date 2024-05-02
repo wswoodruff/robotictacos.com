@@ -44,6 +44,7 @@ var orbit;
 let arrowLeftDown = false;
 let arrowRightDown = false;
 
+var camera;
 
 let mouseYDelta = 0;
 
@@ -92,13 +93,14 @@ export async function inininint() {
   const aa = document.getElementById('threedee1');
   const height = aa.getBoundingClientRect().height;
   // window.innerHeight
-  const camera = new PerspectiveCamera( 75, window.innerWidth / height, 0.1, 2000 );
+  camera = new PerspectiveCamera( 75, window.innerWidth / height, 0.1, 2000 );
   // camera.position.fromArray([0,24,40]);
   // camera.position.fromArray([0, 24.770988266535532, 38.8329249239593]);
   camera.position.fromArray([0, 21.22465751184184, 40.4622033919508]);
+  // camera.rotation.x = -0.4830982133416878;
   // camera.position.fromArray([0.8572659096940822, 1.6405420129153931, 2.9213720880347744]);
   // camera.lookAt(new THREE.Vector3(0,0,0));
-  camera.lookAt(new Vector3(0,0,0).fromArray([0.00859148296684644, -0.24372632714083164, -0.9698059929072776]).multiplyScalar(1));
+    // camera.lookAt(new Vector3(0,0,0).fromArray([0.00859148296684644, -0.24372632714083164, -0.9698059929072776]).multiplyScalar(1));
   // camera.lookAt(new THREE.Vector3(0,0,0).fromArray([-0.002380159629899302, -0.17895685250015073, -0.9838540439431938]).multiplyScalar(1));
   // camera.lookAt(new THREE.Vector3(200,4,0));
   window.cam = camera;
@@ -511,6 +513,9 @@ let vv294 = new Vector3();
         tacocar1.position.x += speed;
       }
     }
+    
+    // camera.position.x = tacocar1.position.x;
+    // camera.lookAt(camera.position);
     
     // basic Entities ecs system
     for (var i = 0; i < animationPool.length; i++) {
