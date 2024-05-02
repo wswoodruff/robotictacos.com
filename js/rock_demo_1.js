@@ -668,8 +668,8 @@ function addPostProcessing(root) {
           composer.addPass( afterimagePass );
 
   				const effect1 = new ShaderPass( DotScreenShader );
-  				effect1.uniforms[ 'scale' ].value = 4;
-  				// composer.addPass( effect1 );
+  				effect1.uniforms[ 'scale' ].value = 8;
+  				composer.addPass( effect1 );
 
   				const effect2 = new ShaderPass( RGBShiftShader );
   				effect2.uniforms[ 'amount' ].value = 0.015;
