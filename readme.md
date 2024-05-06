@@ -21,3 +21,7 @@ and add a new index prop for your custom index file
 run these and then git push, those steps seemed to have worked
 - npm run build
 - npm run deploy
+
+https://github.com/wswoodruff/robotictacos.com
+
+git reset --hard
