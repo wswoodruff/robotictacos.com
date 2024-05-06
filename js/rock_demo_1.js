@@ -3,7 +3,7 @@
 // https://discourse.threejs.org/t/error-relative-references-must-start-with-either-or/13573/19
 
 // import * as THREE from 'three';
-import {Group, Box3, Vector3, Clock, MeshStandardMaterial, 
+import {Vector2, Group, Box3, Vector3, Clock, MeshStandardMaterial, 
   MeshBasicMaterial, BoxGeometry, Mesh, AxesHelper, Scene, 
   Color, PerspectiveCamera, WebGLRenderer, PCFSoftShadowMap, 
   HemisphereLight, HemisphereLightHelper, SphereGeometry, 
@@ -22,6 +22,9 @@ import { BaseModel } from './utils/baseModel.js';
 
 import { isBetween, remapNormal } from './utils/mathness.js';
 
+// https://github.com/mrdoob/three.js/blob/dev/examples/jsm/math/SimplexNoise.js
+// https://github.com/mrdoob/three.js/blob/dev/examples/jsm/math/ImprovedNoise.js
+import { ImprovedNoise } from 'three/examples/jsm/math/improvedNoise.js';
 
 import * as THREE from 'three';
 
@@ -30,6 +33,7 @@ import * as THREE from 'three';
 			import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 
 			import { RGBShiftShader } from 'three/addons/shaders/RGBShiftShader.js';
+			import { NOTRGBShiftShader } from './screenShaders/NOTRGBShiftShader.js';
 			import { DotScreenShader } from 'three/addons/shaders/DotScreenShader.js';
 			import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
       
@@ -54,11 +58,14 @@ const ovo = {
   animationPool : new CheapPool(),
   gameTime: new Clock(),
   viewFrustum : new Frustum(),
+  usePostProcessing : false,
   
   // specials for this noise
   firstColor : new Color().setHex(0xff5cbb),
   seconistColor : new Color().setHex(0xfff45c),
   
+  noise1 : new ImprovedNoise(),
+  tacosCars : new CheapPool(),
 }
 
 
@@ -116,7 +123,8 @@ export async function inininint() {
 
   setupResize(ovo, ovo.camera, ovo.renderer)
 
-  addPostProcessing(ovo)
+  addPostProcessing(ovo);
+  ovo.usePostProcessing = true;
     
   // 
   // {
@@ -135,7 +143,7 @@ export async function inininint() {
   // }
   {
     
-  let yy = loadModel(ovo, ovo.scene, {name:"tacoscar1", url:"../models/tacocar/tacocar1.glb"})
+  let yy = loadModel(ovo, ovo.scene, {cache: ovo.tacosCars, name:"tacoscar1", url:"../models/tacocar/tacocar1.glb"})
   }
   
   // for (var i = 0; i < 8; i++) {
@@ -245,8 +253,14 @@ export async function inininint() {
     
     const delta = ovo.gameTime.getDelta();
     
-    if(ovo["tacoscar1"]){
-      ovo["tacoscar1"].rotation.y += delta * 4.4;
+    if(ovo.tacosCars.length > 0){
+      for (var i = 0; i < ovo.tacosCars.length; i++) {
+        let yy = ovo.tacosCars[i];
+        yy.rotation.y += delta * 2.4;
+        // <<<<
+        yy.position.y = Math.cos(ovo.gameTime.getElapsedTime() * 3.0) * 2
+        // ovo["tacoscar1"].position.y = ovo.noise1.noise(ovo.gameTime.getElapsedTime() * 2, 0, 0) * 10 * 0.5;
+      }
     }
     
     
@@ -287,12 +301,18 @@ export async function inininint() {
 
     }
     
+    if(ovo.circlesShader1){
+      ovo.circlesShader1.uniforms[ 'u_time' ].value = ovo.gameTime.getElapsedTime();
+    }
     
 
+    if(ovo.usePostProcessing){
+      ovo.composer.render();
+    }
+    else {
+      ovo.renderer.render( ovo.scene, ovo.camera );
+    }
     
-  	// ovo.renderer.render( ovo.scene, ovo.camera );
-    
-    ovo.composer.render();
   }
   animate();
 
@@ -559,21 +579,22 @@ function addVolume({item, volumeW=1, volumeH=1, volumeD=1}) {
 
 
 // needs a scene grapth instead 
-async function loadModel(root, scene, { name="", url="" } = {}) {
-  // var result = await new GLTFLoader().loadAsync("../models/tacocar/tacocar1.glb");
+async function loadModel(root, scene, { cache, name="", url="" } = {}) {
+
   var result = await new GLTFLoader().loadAsync(url);
-  // debugger
+  
   let model1 = result.scene;
-  // tacocar1 = model1;
+  
   
   // needs a scene grapth instead 
-  root[name] = new BaseModel(model1);
-  root[name].position.set(0,0,0)
+  let yy = new BaseModel(model1);
+  cache.add(yy);
+  yy.position.set(0,0,0)
   
   // result.scene.scale.setScalar(0.2)
   // result.scene.position.setScalar(0,0,0);
-  scene.add(root[name]);
-  return root[name];
+  scene.add(yy);
+  return yy;
   // enableShadowsObject(tacocar1);
   // addVolume({item: tacocar1, volumeW:7, volumeH:6, volumeD:4})
 }
@@ -618,6 +639,8 @@ function testIfInView(root,item,modeX, modeY) {
   return false;
 }
 
+
+// theres a better one on stackoverflow
 
 function crappyScreenWrapIn3D(root,item) {
   if(item.wasInView && !testIfInView(root, item) ){
@@ -665,15 +688,31 @@ function addPostProcessing(root) {
   				composer.addPass( new RenderPass( root.scene, root.camera ) );
           
           const afterimagePass = new AfterimagePass();
-          composer.addPass( afterimagePass );
+          // composer.addPass( afterimagePass );
 
   				const effect1 = new ShaderPass( DotScreenShader );
   				effect1.uniforms[ 'scale' ].value = 8;
-  				composer.addPass( effect1 );
+  				// composer.addPass( effect1 );
 
-  				const effect2 = new ShaderPass( RGBShiftShader );
+  				// const effect2 = new ShaderPass( RGBShiftShader );
+  				const effect2 = new ShaderPass( NOTRGBShiftShader );
   				effect2.uniforms[ 'amount' ].value = 0.015;
+          // needs a live update
+          const aa = document.getElementById('threedee1');
+          const rect = aa.getBoundingClientRect();
+          // const aspectRatio = window.innerWidth / window.innerHeight;
+          root.circlesShader1 = effect2;
+          
+          console.log("¿¿¿ 222 window.innerWidth", rect.width, rect.height);
+          // const resolution = new Vector2(window.innerWidth, window.innerHeight);
+          const resolution = new Vector2(rect.width, rect.height);
+          effect2.uniforms[ 'resolution' ].value = resolution;
+          effect2.uniforms[ 'aspectRatio' ].value = rect.width / rect.height;
+          
   				composer.addPass( effect2 );
+          
+          // composer.addPass( effect1 );
+          // composer.addPass( afterimagePass );
 
   				const effect3 = new OutputPass();
   				composer.addPass( effect3 );

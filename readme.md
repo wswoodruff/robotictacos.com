@@ -10,3 +10,14 @@ npx vite
 npx vite build
 
 https://github.com/wswoodruff/robotictacos.com/actions
+
+not sure actions works
+edit vite.config.js 
+build: {
+  rollupOptions: {
+    input: {
+and add a new index prop for your custom index file
+
+run these and then git push, those steps seemed to have worked
+- npm run build
+- npm run deploy
