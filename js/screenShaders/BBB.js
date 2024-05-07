@@ -1,5 +1,5 @@
 
-const NOTRGBShiftShader = {
+const BBB = {
 
 	name: 'RGBShiftShader',
 
@@ -83,6 +83,34 @@ float map(float value, float min1, float max1, float min2, float max2) {
   return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
 }
 
+
+vec3 rotate(vec3 p, float angle, vec3 axis) {
+    float s = sin(angle);
+    float c = cos(angle);
+    float oc = 1.0 - c;
+    
+    mat3 rotationMatrix = mat3(
+        axis.x * axis.x * oc + c,         axis.y * axis.x * oc - axis.z * s,  axis.z * axis.x * oc + axis.y * s,
+        axis.x * axis.y * oc + axis.z * s, axis.y * axis.y * oc + c,          axis.z * axis.y * oc - axis.x * s,
+        axis.x * axis.z * oc - axis.y * s, axis.y * axis.z * oc + axis.x * s,  axis.z * axis.z * oc + c
+    );
+
+    return rotationMatrix * p;
+}
+
+
+vec4 toCameraSpace(vec4 p) {
+    // Perspective transformation
+    p.xy *= 1.0 / p.z;
+    return p;
+}
+
+vec4 toScreenSpace(vec4 p) {
+    // Undo perspective transformation
+    p.xy *= p.z;
+    return p;
+}
+
   void main() {
     
     vec2 st = vUv.xy;
@@ -97,81 +125,62 @@ float map(float value, float min1, float max1, float min2, float max2) {
     
     
     
-    vec2 pos = vec2(0.0,0.0) - st;
+    // vec2 pos = vec2(0.0,0.0) - st;
+		vec4 pos3d = vec4(st.x, st.y, 0.0, 1.0); // Point in screen space
 
-    
-    float d = length(pos) / 1.824;
+
+		// Apply perspective transformation
+		pos3d = toCameraSpace(pos3d);
+		
+		
+		// 3D rotation around the y-axis
+    float rotationAngle = u_time * 0.5; // Adjust the speed of rotation
+    vec3 rotatedPos = rotate(pos3d.xyz, rotationAngle, vec3(0.0, 1.0, 0.0));
+		
+		// 
+		// // float rotationAngle = u_time * 0.5; // Adjust the speed of rotation
+    // // pos = vec2(rotate(vec3(pos, 0.0), rotationAngle, vec3(0.0, 1.0, 0.0)).xy);
+		// 
+		// // Transform back to screen space
+    pos3d.xyz = rotatedPos;
+		
+    vec3 pos2bb = toScreenSpace(pos3d).xyz;
+		
+		// 
+		// 
+		vec2 posC = vec2(0.0,0.0) - st;
+    float d = length(pos2bb) / 1.824;
+    // // float d = length(1.) / 1.824;
+		
+		vec2 pos = vec2(0.0,0.0) - st;
+		// vec2 pos = pos3d.xy;
+		// float d = length(pos) / 1.824;
 
     vec3 color = vec3(1.0-smoothstep(.4,0.41,d));
     
     vec4 cg = texture2D(tDiffuse, vUv);
     
-    // gl_FragColor = vec4( vec3(st.x, st.y, 0.0), 1.0);
-    //gl_FragColor = vec4( vec3(pos.x, pos.y, 0.0), 1.0);
-    // gl_FragColor = vec4( vec3(pos.x, pos.y, 0.0), 1.0);
-    
-    // gl_FragColor *= vec4( color, 1.0);
-    
     gl_FragColor = vec4( cg.rgb, 1.0);
-    // add mask effect!!
-    
-    float db = length(pos) / 1.724;
-    vec3 colorB = vec3(1.0-smoothstep(.4,0.402,db));
-    color = 1.0-color*0.2;
-    color *= vec3( colorB);
-    // 
-    gl_FragColor *= vec4( 1.0-color*0.2, 1.0);
-    // gl_FragColor *= vec4( color, 1.0);
-    
-
-    // circle2
-    // float d2 = length(pos) / 1.624;
-    // vec3 color2 = vec3(1.0-smoothstep(.4,0.402,d2));
-    // 
-    // float d3 = length(pos) / 1.54;
-    // vec3 color3 = vec3(1.0-smoothstep(.4,0.402,d3));
-    // 
-    // color2 = color2 - color3;
-    
-    vec3 color2 = ring(pos, 1.9, 0.05);
-    
-    // gl_FragColor += vec4( color2, 1.0);
-    
-    vec3 color3 = ring(pos, 2.2, 0.02);
-    // gl_FragColor += vec4( color3, 1.0);
-    
-    vec3 color4 = ring(pos, 2.8, 0.01);
-    // gl_FragColor += vec4( color4, 1.0);
-
-    // float sw = cos(u_time*2.)*2.+1.4;
-    float sw = map( cos(u_time *4.0), -1.0,1.0,1.9,3.0  );
-    vec3 color5 = ring(pos, sw, 0.01);
-    gl_FragColor += vec4( color5, 1.0);
-
-
-    float sw2 = map( cos(u_time*6.0+2.0), -1.0,1.0,1.4,3.0  );
-    // float sw2 = map( 1.-camera_dis, -1.0,1.0,1.4,3.0  );
-    vec3 color6 = ring(pos, sw2, 0.01);
-    gl_FragColor += vec4( color6, 1.0);
     
     
-    vec2 pos2 = pos;
+    vec2 pos2 = pos.xy;
     pos2.y *= -1.;
-    	// gl_FragColor.rgb += outlineShape(3, pos2, 1.160, 0.02);
     
-    // gl_FragColor.rgb += outlineShape(3, pos2, 1.060, 0.02);
-    
-    
-    for (int i = 1; i < 5; i++) {
-      // gl_FragColor.rgb += outlineShape(3, pos2, 1.060-(float(i)*0.2), 0.02);
-      // gl_FragColor.rgb += outlineShape(3, pos2, sin(1.060-(float(i)*0.2)), 0.02);
-      gl_FragColor.rgb += outlineShape(3, pos2, sin(2.060-(float(i)*0.2*u_time)), 0.02);
-      gl_FragColor.rgb += outlineShape(3, pos2, sin(2.060-(float(i)*0.2*u_time))*9., 0.02);
-      // gl_FragColor.r = float(i);
-    }
-    
+		// float fScale = 2.0;
+		// float fScale = 1.0/camera_dis*29.0;
+		// fScale = sin(fScale);
+		// float fScale += cos(u_time*4.0);
+		
+		// trying to find the cameras distance as a scalar
+		float fScale = cos(u_time*4.0);
+		fScale = map(fScale, -1.0, 1.0, 0.2, 0.6);
+		fScale *= 1.0/camera_dis*29.0;
+		
+		gl_FragColor.rgb += outlineShape(3, pos2, fScale, 0.02);
+		// gl_FragColor.rgb += outlineShape(3, pos2, sin(2.060-(float(1)*0.2*u_time)), 0.02);
+
   }`
 
 };
 
-export { NOTRGBShiftShader };
+export { BBB };
