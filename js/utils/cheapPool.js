@@ -12,8 +12,8 @@ export class CheapPool extends Array{
   //   super();
   // }
   // 0 to length
-  add(item){
-    this.push(item);
+  add(...item){
+    this.push(...item);
   }
   // 0 to length
   // [a,b,c] to:

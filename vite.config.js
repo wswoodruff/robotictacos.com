@@ -1,5 +1,6 @@
 // vite.config.js
 import { viteStaticCopy as Copy } from 'vite-plugin-static-copy'
+import path from 'path';
 
 export default {
     plugins: [
@@ -19,9 +20,16 @@ export default {
           main: './index.html',
           tacos: './indextacos.html',
           rock: './indexrock.html',
+          dogskate: './index_dogskate.html',
+          jellysealife: './index_jellysealife01.html'
           // ...
           // List all files you want in your build
         }
       }
+    },
+    resolve : {
+      alias: {
+        '@builders': path.resolve(__dirname, './js/utils/builders/builders.js')
+      },
     }
 }

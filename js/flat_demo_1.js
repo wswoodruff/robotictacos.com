@@ -2,11 +2,12 @@
 
 // https://discourse.threejs.org/t/error-relative-references-must-start-with-either-or/13573/19
 
-import { Clock, Frustum, Vector2, Color, Vector3, CameraHelper, Matrix4 } from 'three';
+import { Clock, Frustum, Vector2, Color, Vector3, CameraHelper, 
+  Matrix4, Mesh, PlaneGeometry, ShaderMaterial, Scene } from 'three';
 
 import { scene, camera, renderer, orbitCamera, addBounds, 
   cube, hemiLight, skydome, ambientLight, sunlight, 
-  floor, setupResize, addVolume, loadModel } from './utils/builders.js';
+  floor, setupResize, addVolume, loadModel, orthographicCamera } from './utils/builders.js';
   
 import { lerpBackgroundColor_CM, crappyScreenWrapIn3D, testIfInView } from './utils/variousFunctions.js';
 
@@ -84,32 +85,68 @@ export async function inininint() {
   camera(ovo, {position:[0, 0, 40]});
   
   renderer(ovo);
+  ovo.renderer.autoClear = false;
   
   orbitCamera(ovo, ovo.camera, ovo.renderer)
   
-  {
-  const yy = cube(ovo.scene,{color:0xffffff});
-  ovo.slidyCube1 = yy;
-  ovo.scene.add(yy)
-  yy.position.set(0,2,0)
-  yy.scale.set(22,2,0.2)
-  yy.scale.multiplyScalar(2)
-  // need 
-  // spin(cube)
-  yy.position.set(-40,8,-4);
-  yy.updateMatrix(true);// need box3 to be ready
-  yy.updateBox3();
+  const aa = document.getElementById('threedee1');
+  const rect = aa.getBoundingClientRect();
+  ovo.orthographicCamera = new orthographicCamera( ovo, {rect:rect, near: 1, far: 1000} );
+  
+  
+  { // setting up a backgound plane for shader effects wallpaper of sorts
+    // https://codepen.io/Fyrestar/pen/abOEOda
+    // https://discourse.threejs.org/t/how-do-i-use-my-own-custom-shader-as-a-scene-background/13598
+    // #iur98349jf
+    ovo.wallpaperScene = new Scene();
+    const material = new ShaderMaterial({
+      uniforms: {
+    		u_time: { value: 0.0 },
+    	},
+      vertexShader: `
+        varying vec2 vUv;
+        
+        void main() {
+            vUv = uv;
+            gl_Position = vec4( position, 1.0 );    
+        }
+      `,
+      fragmentShader: `
+        varying vec2 vUv;
+        uniform float u_time;
+         
+        void main() {
+          // vec4 color = vec4( 0.0, vUv.x, vUv.y, 1.0 );
+          // basic color strobe effect from shadertoy default with tweaks
+          vec4 color = vec4(0.5 + 0.5*cos(u_time+vUv.xyx+vec3(0,2,4)), 1.0);
+          gl_FragColor = color;
+        }
+      `
+    });
+    material.depthWrite = false;
+    
+    const geometry = new PlaneGeometry( 2,2 );
+    // const material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+    const plane = new Mesh( geometry, material );
+    plane.position.z = 0;
+    // ovo.scene.add( plane );
+    ovo.wallpaperScene.add( plane );
+    ovo.backgroundPlane = plane;
   }
+  
+  
   {
-  const yy = cube(ovo.scene,{color:0xffffff});
-  ovo.slidyCube2 = yy;
-  ovo.scene.add(yy)
-  yy.position.set(0,2,0)
-  yy.scale.set(22,2,0.2)
-  yy.scale.multiplyScalar(2)
-  // need 
-  // spin(cube)
-  yy.position.set(40,-8,-4);
+    const yy = cube(ovo.scene,{color:0xffffff});
+    ovo.basicCube = yy;
+    // ovo.scene.add(yy)
+    yy.position.set(0,2,0)
+    // yy.scale.set(22,2,0.2)
+    yy.scale.multiplyScalar(8)
+    // need 
+    // spin(cube)
+    // yy.position.set(-40,8,-4);
+    yy.updateMatrix(true);// need box3 to be ready
+    yy.updateBox3();
   }
 
 
@@ -128,166 +165,79 @@ export async function inininint() {
 
   setupResize(ovo, ovo.camera, ovo.renderer)
 
-  addPostProcessing(ovo);
-  ovo.usePostProcessing = true;
+  // addPostProcessing(ovo);
+  // ovo.usePostProcessing = true;
     
-  // 
-  // {
-  // // var result = await new GLTFLoader().loadAsync("../models/catlike1.glb");
-  // var result = await new GLTFLoader().loadAsync("../models/tacocar/tacocar1.glb");
-  // // debugger
-  // let model1 = result.scene;
-  // // tacocar1 = model1;
-  // ovo.tacocar1 = new BaseModel(model1);
-  // ovo.tacocar1.position.set(0,0,0)
-  // // result.scene.scale.setScalar(0.2)
-  // // result.scene.position.setScalar(0,0,0);
-  // ovo.scene.add(ovo.tacocar1);
-  // // enableShadowsObject(tacocar1);
-  // // addVolume({item: tacocar1, volumeW:7, volumeH:6, volumeD:4})
-  // }
-  {
-    
-  let yy = loadModel(ovo, ovo.scene, {cache: ovo.tacosCars, name:"tacoscar1", url:"../models/tacocar/tacocar1.glb"})
-  }
-  
-  // for (var i = 0; i < 8; i++) {
-  //   let gg = model1.clone();
-  //   animals.push(gg);
-  //   gg.position.x += i * 1.8 + -6;
-  // 
-  //   scene.add(gg);
-  // 
-  // }
-  
-  // floor
-  // floor(ovo, ovo.scene)
-
-
-  document.addEventListener("wheel", (event) => {
-  // renderer.domElement.addEventListener("wheel", (event) => {
-    // console.log(event.deltaY );
-    ovo.mouseDelta.y += event.deltaY;
-    ovo.mouseDelta.x += event.deltaX;
-    // animate();
-  });
-  
-
-  // https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
-
+  // cube(ovo.scene)
 
 
   // 
   // LOOP
   // 
 
-// y = clamp(sin(x  * 2.664) * 1.448, -1.0, 1.0);
-
   function animate() {
   	requestAnimationFrame( animate );
     if(ovo.orbitControl !== undefined){
       ovo.orbitControl.update();
     }
-    // for (var i = 0; i < animals.length; i++) {
-    //   let gg = animals[i];
-    //   gg.rotation.y =  (i * 0.2) + mouseYDelta * 0.1 ;
-    //   gg.rotation.x =  (i * 0.04) + mouseYDelta * 0.01 ;
-    //   gg.rotation.z =  (i * 0.2) + mouseYDelta * 0.04 ;
-    //   // gg.rotation.y += mouseYDelta * 0.001;
-    //   // gg.rotation.y -= 0.1;
-    // }
-    
-
-    
-    // this belongs in an ecs of the car player
-    // if(tacocar1){
-    //   tacocar1.position.x += 0.1;
-    // }
-    // let speed = 0.9;
-    // // let speed = 0.4;
-    // if (arrowLeftDown) {
-    //   if(tacocar1){
-    //     tacocar1.position.x += -speed;
-    //   }
-    // }
-    // if (arrowRightDown) {
-    //   if(tacocar1){
-    //     tacocar1.position.x += speed;
-    //   }
-    // }
-    
-    // camera.position.x = tacocar1.position.x;
-    // camera.lookAt(camera.position);
     
     const delta = ovo.gameTime.getDelta();
-    
-    if(ovo.tacosCars.length > 0){
-      for (var i = 0; i < ovo.tacosCars.length; i++) {
-        let yy = ovo.tacosCars[i];
-        yy.rotation.y += delta * 2.4;
-        
-        yy.position.y = Math.cos(ovo.gameTime.getElapsedTime() * 3.0) * 2
-        // ovo["tacoscar1"].position.y = ovo.noise1.noise(ovo.gameTime.getElapsedTime() * 2, 0, 0) * 10 * 0.5;
-      }
-    }
+
     
   
   
-    
-    if(ovo.slidyCube1){
-      const yy = ovo.slidyCube1;
-      // yy.position.set(-40,12,0);
-      
-      yy.mPositionX = yy.position.x;
-      yy.position.x += delta * 144;
-      yy.updateMatrixWorld();
-      yy.box3 && yy.updateBox3();
-      // console.log(yy.box3);
-        
-      crappyScreenWrapIn3D(ovo,yy)
+    // 
+    // if(ovo.slidyCube1){
+    //   const yy = ovo.slidyCube1;
+    //   // yy.position.set(-40,12,0);
+    // 
+    //   yy.mPositionX = yy.position.x;
+    //   yy.position.x += delta * 144;
+    //   yy.updateMatrixWorld();
+    //   yy.box3 && yy.updateBox3();
+    //   // console.log(yy.box3);
+    // 
+    //   crappyScreenWrapIn3D(ovo,yy)
+    // 
+    // }
+
+    if(ovo.backgroundPlane){
+        ovo.backgroundPlane.material.uniforms[ 'u_time' ].value = ovo.gameTime.getElapsedTime();
 
     }
-    if(ovo.slidyCube2){
-      const yy = ovo.slidyCube2;
-      // yy.position.set(-40,12,0);
-      yy.mPositionX = yy.position.x;
-      yy.position.x += -delta * 44;
-      yy.updateMatrixWorld();
-      yy.box3 && yy.updateBox3();
-      crappyScreenWrapIn3D(ovo,yy)
-      
-    }
-    
-    
     
     
     // lerpBackgroundColor_CM(ovo,ovo.firstColor, ovo.seconistColor, ovo.gameTime.getElapsedTime() * 2)
     
-    // basic Entities ecs system
-    for (var i = 0; i < ovo.animationPool.length; i++) {
-      
-      let pick = ovo.animationPool[i];
-      pick.entities.run();
 
-    }
-    
-    if(ovo.circlesShader1){
-      ovo.circlesShader1.uniforms[ 'u_time' ].value = ovo.gameTime.getElapsedTime();
-      // spenssive
-      const distance = ovo.camera.position.distanceTo( ovo.orbitControl.target );
-      // console.log(distance);
-      ovo.circlesShader1.uniforms[ 'camera_dis' ].value = distance;
-      
-      
-
-    }
+    // 
+    // if(ovo.circlesShader1){
+    //   ovo.circlesShader1.uniforms[ 'u_time' ].value = ovo.gameTime.getElapsedTime();
+    //   // spenssive
+    //   const distance = ovo.camera.position.distanceTo( ovo.orbitControl.target );
+    //   // console.log(distance);
+    //   ovo.circlesShader1.uniforms[ 'camera_dis' ].value = distance;
+    // 
+    // 
+    // 
+    // }
     
 
     if(ovo.usePostProcessing){
       ovo.composer.render();
     }
     else {
-      ovo.renderer.render( ovo.scene, ovo.camera );
+      
+      // if needing a wallpaper effect without a renderpass
+      // // #iur98349jf
+      const renderer = ovo.renderer;
+      renderer.autoClear = false;
+      renderer.clear();
+      renderer.render( ovo.wallpaperScene, ovo.orthographicCamera );
+      renderer.render( ovo.scene, ovo.camera );
+
+      // otherwise a normal render
+      // ovo.renderer.render( ovo.scene, ovo.camera );
     }
     
   }

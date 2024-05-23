@@ -20,7 +20,7 @@ export class BaseModel extends PatchObject3D {
   
   box3 = new Box3();
   
-  constructor(item){
+  constructor(item, resetPositions = true){
     super();
     
     // if (debug) {
@@ -28,12 +28,14 @@ export class BaseModel extends PatchObject3D {
       this.add( axesHelper );
     // }
     
+    // debugger
     // fixes global position from export, and adds object to this object
     // should this some how delete the original????
     // .add moves it reguardless from Object3D
     if(item){
       for (var i = 0; i < item.children.length; i++) {
-        item.children[i].position.setScalar(0,0,0)
+        if(resetPositions) item.children[i].position.setScalar(0,0,0);
+        
         this.add(item.children[i]);
       }
     }

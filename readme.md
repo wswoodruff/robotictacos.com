@@ -31,3 +31,11 @@ git reset --hard
 ## tools
 
 builders.js has a bunch of basic modules for export
+
+
+making a new demo
+dup an index file
+in vite.conf in input, add a line with whatever name and the index name path
+in the new index file replace the inininint import to a new name
+use that new name and duplicate a ./js/name _ demo .js file
+rework the file!!

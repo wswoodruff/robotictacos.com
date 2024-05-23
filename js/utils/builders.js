@@ -3,9 +3,9 @@
 // etc
 
 
-import {Vector2, Group, Box3, Vector3, Clock, MeshStandardMaterial, 
+import {Euler, Vector2, Group, Box3, Vector3, Clock, MeshStandardMaterial, 
   MeshBasicMaterial, BoxGeometry, Mesh, AxesHelper, Scene, 
-  Color, PerspectiveCamera, WebGLRenderer, PCFSoftShadowMap, 
+  Color, PerspectiveCamera, OrthographicCamera, WebGLRenderer, PCFSoftShadowMap, 
   HemisphereLight, HemisphereLightHelper, SphereGeometry, 
   ShaderMaterial, AmbientLight, DirectionalLight, CameraHelper, BackSide, PlaneGeometry, DoubleSide,
   Frustum, Matrix4 } from 'three';
@@ -21,7 +21,9 @@ export function scene(root, {color=0x5cb6ff}={}){
   root.scene = new Scene();
   // scene.fog = new THREE.Fog( scene.background, 1, 5000 );
   // root.scene.background = new Color().setHSL( 0.5, 1, 0.7 );
+  
   root.scene.background = new Color().setHex( color );
+  
   // root.scene.background = new Color().setHex( 0x00000 );
 }
 
@@ -44,10 +46,19 @@ export function camera(root,{position=[0, 21.2, 40.4]}={}) {
   root.camera = camera;
 }
 
-export function renderer(root) {
+
+// const camera = new THREE.OrthographicCamera( -1, 1, 1, -1, 0, 1 );
+export function orthographicCamera(root,{rect,near=1,far=1000}){
+  const camera = new OrthographicCamera( rect.width / - 2, rect.width / 2, rect.height / 2, rect.height / - 2, near, far );
+  root.orthographicCamera = camera;
+  return camera;
+}
+
+
+export function renderer(root,{antialias=false}={}) {
   
   const aa = document.getElementById('threedee1');
-  const renderer = new WebGLRenderer({antialias:true});
+  const renderer = new WebGLRenderer({antialias:antialias});
   // document.body.appendChild( renderer.domElement );
   // renderer.setSize( window.innerWidth, window.innerHeight );
   renderer.setSize( window.innerWidth, aa.getBoundingClientRect().height );
@@ -87,19 +98,38 @@ export function addBounds(item) {
   }
 }
 
-export function cube({color=0x00ff00, materialShader="basic"}={}){
+export function cube(scene,{color=0x00ff00, materialShader="standard", addToScene = true}={}){
     const geometry = new BoxGeometry( 1, 1, 1 );
-    // let material;
-    // if (materialShader === "flat") {
-    //   material = new MeshMaterial( { color: color } );
-    // }
-    let material = new MeshBasicMaterial( { color: color } );
+    let material;
+    if (materialShader === "basic") {
+      // material = new MeshMaterial( { color: color } );
+      material = new MeshBasicMaterial( { color: color } );
+    }
+    else if(materialShader === "standard"){
+      material = new MeshStandardMaterial( { color: color } );
+    }
     const cube = new Mesh( geometry, material ) ;
     // const cube = new BaseModel( new Mesh( geometry, material ) );
     addBounds(cube);
-    // scene.add( cube );
+    if (addToScene) scene.add( cube );
     return cube;
 }
+
+// export function sphere(scene,{color=0x00ff00, materialShader="standard", radius=1}={}){
+//   const geometry = new SphereGeometry( radius, 12, 12 ); 
+//   let material;
+//   if (materialShader === "basic") {
+//     material = new MeshBasicMaterial( { color: color } );
+//   }
+//   else if(materialShader === "standard"){
+//     material = new MeshStandardMaterial( { color: color } );
+//   }
+//   const _sphere = new Mesh( geometry, material );
+//   // scene.add( sphere );
+//   return _sphere;
+// }
+
+
 
 export function hemiLight(addHelper,root){
   // var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
@@ -243,7 +273,7 @@ export function setupResize(root, camera, renderer) {
   		camera.updateProjectionMatrix();
 
   		renderer.setSize( window.innerWidth, height );
-      ovo.composer.setSize( window.innerWidth, height );
+      root.composer.setSize( window.innerWidth, height );
   	}
 }
 
@@ -269,15 +299,17 @@ export function addVolume({item, volumeW=1, volumeH=1, volumeD=1}) {
 
 
 // needs a scene grapth instead 
-export async function loadModel(root, scene, { cache, name="", url="" } = {}) {
+// note you need a promise if you need to edit this on loaders
+// .then(gg=>{gg.fish()})
+export async function loadModel(root, scene, { cache, name="", url="", resetPositions=true } = {}) {
 
   var result = await new GLTFLoader().loadAsync(url);
   
   let model1 = result.scene;
-  
+  debugger
   
   // needs a scene grapth instead 
-  let yy = new BaseModel(model1);
+  let yy = new BaseModel(model1, resetPositions);
   cache.add(yy);
   yy.position.set(0,0,0)
   
@@ -287,4 +319,34 @@ export async function loadModel(root, scene, { cache, name="", url="" } = {}) {
   return yy;
   // enableShadowsObject(tacocar1);
   // addVolume({item: tacocar1, volumeW:7, volumeH:6, volumeD:4})
+}
+
+
+
+
+export function addBlenderCameraControls(root, camera) {
+    // const front = new Euler(0,0,-1);
+    const forward = new Vector3(0,0,-1);
+    // https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
+    document.addEventListener("keydown", (event) => {
+      // if (event.key === "a") {
+      //   console.log("a");
+      //   streetTiles1.snap(streetTiles1.horizontal[0], streetTiles1.horizontal[1], "west", "east" );
+      // }
+      // if (event.key === "s") {
+      //   console.log("s");
+      //   streetTiles1.snap(streetTiles1.horizontal[0], streetTiles1.horizontal[1], "east", "west" );
+      // }
+      if (event.key === "1") {
+        console.log("front camera");
+        // const dis = camera.position.distanceTo(zero);
+        // root.orbitControl.enabled = false;
+        // camera.lookAt(forward);
+        // camera.updateMatrix()
+      }
+
+      
+      // do something
+    });
+    
 }
