@@ -15,6 +15,21 @@ export class CheapPool extends Array{
   add(...item){
     this.push(...item);
   }
+  remove(item){
+    const index = this.indexOf(item);
+    if (index > -1) this.splice(index, 1);
+  }
+//   function removeItemAll(arr, value) {
+//   var i = 0;
+//   while (i < arr.length) {
+//     if (arr[i] === value) {
+//       arr.splice(i, 1);
+//     } else {
+//       ++i;
+//     }
+//   }
+//   return arr;
+// }
   // 0 to length
   // [a,b,c] to:
   // [b,c,a]

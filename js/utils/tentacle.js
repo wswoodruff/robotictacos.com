@@ -6,6 +6,11 @@ import { Object3D } from 'three';
 
 import { sphere } from '@builders';
 
+
+// needs an interface
+// joints : []
+// update : ()
+
 export class Tentacle extends Object3D{
   joints = new CheapPool();
   sticks = new CheapPool();

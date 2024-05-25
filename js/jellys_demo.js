@@ -23,8 +23,13 @@ import { CheapPool } from './utils/cheapPool.js';
 import { CubeMesh } from './utils/cubeMesh.js';
 import { CarModel } from './utils/carModel.js';
 import { BaseModel } from './utils/baseModel.js';
+
 import { Stick } from './utils/stick.js';
 import { Tentacle } from './utils/tentacle.js';
+import { ChainModel } from './utils/physicsLike/chainModel.js';
+import { PinnedChainModel } from './utils/physicsLike/pinnedChainModel.js';
+
+import { CoilSample } from './utils/physicsLike/springV2.js';
 
 import { isBetween, remapNormal } from './utils/mathness.js';
 
@@ -50,6 +55,7 @@ import { AfterimagePass } from 'three/addons/postprocessing/AfterimagePass.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 import { DragControls } from 'three/addons/controls/DragControls.js';
+
 
 
 // import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
@@ -86,7 +92,10 @@ const ovo = {
   noise1 : new ImprovedNoise(),
   modelsCache : new CheapPool(),
   
-  pickables : new CheapPool()
+  pickables : new CheapPool(),
+  
+  draggingItems : new CheapPool()
+  
 }
 
 
@@ -261,25 +270,68 @@ export async function inininint() {
     let count = 10;
     for (var i = 1; i < count; i++) {
       _tent1.addJoint([0, i*-1, 0,], 0.2, 0.1);
+      // _tent1.addJoint([0, i*-1+-Math.random(), 0,], 0.2, 0.1);
     }
     // _tent1.addJoint([0, -4, 0,], 0.5);
     
-    ovo.pickables.add(..._tent1.joints);
+    // ovo.chainModel_1 = new ChainModel({
+    //   pointer:_tent1, stiffness : 0.1, mass:2.2, gravity:-0.05, damping: 0.701
+    // });
+    // ovo.animationPool.add(ovo.chainModel_1);
+    
+    ovo.chainModel_1 = new PinnedChainModel({
+      // pointer:_tent1, stiffness : 0.1, mass:1.7, gravity:-0.05, damping: 0.701
+      pointer:_tent1, stiffness : 0.1, mass:1.7, gravity:-0.0, damping: 0.701
+    });
+    ovo.animationPool.add(ovo.chainModel_1);
+    
+    ovo.chainModel_1.addPinned(_tent1.joints[0]);
+    // ovo.chainModel_1.addPinned(_tent1.joints[4]);
+    // _tent1.joint[0].physicsPinned = true;
+    // since we get signals from the drag event selection
+    // we need to hold this data on the 3d object
+
+  ovo.pickables.add(..._tent1.joints);
+  
+  
+  {
+    // adding in a quick spring ball test
+    const anchor = sphere(ovo.scene, {color:0x6c22aa,radius:0.3, computeBounds:true, autoAdd:true});
+    anchor.position.y = 5;
+    ovo.pickables.add(anchor);
+    
+    ovo.springball = sphere(ovo.scene, {color:0x6c5cff,radius:0.7, computeBounds:true, autoAdd:true});
+    ovo.springball.position.y = 4;
+    ovo.pickables.add(ovo.springball);
+    
+    const _g = new Vector3(0,-0.084387,0);
+    
+    ovo.coil_1 = new CoilSample({
+      pointer: ovo.springball,
+      anchor: anchor,
+      position: ovo.springball.position,
+      // mass: 12.0,
+      mass: 2.47,
+      k: 0.2,
+      damping: 0.84,
+      restLength: anchor.position.distanceTo(ovo.springball.position),
+      gravity: _g
+    });
+    ovo.animationPool.add(ovo.coil_1);
     
     
-    ovo.dragControls = new DragControls( [...ovo.pickables], ovo.camera, ovo.renderer.domElement );
-		ovo.dragControls.rotateSpeed = 2;
-      				// ovo.dragControls.addEventListener( 'drag', render );
+  }
+  
+  
+  ovo.dragControls = new DragControls( [...ovo.pickables], ovo.camera, ovo.renderer.domElement );
+	ovo.dragControls.rotateSpeed = 2;
+	// ovo.dragControls.addEventListener( 'drag', render );
     
   ovo.dragControls.addEventListener( 'dragstart', function ( event ) {
-
     // event.object.material.emissive.set( 0xaaaaaa );
     ovo.orbitControl.enabled = false;
     console.log("when start???");
-
-      
-
-  } );
+  });
 
   ovo.dragControls.addEventListener( 'drag', function ( event ) {
     // _stick.p1.set(2,0,-1)
@@ -290,72 +342,85 @@ export async function inininint() {
 
   ovo.dragControls.addEventListener( 'dragend', function ( event ) {
 
-  // event.object.material.emissive.set( 0x000000 );
+    // event.object.material.emissive.set( 0x000000 );
     ovo.orbitControl.enabled = true;
-console.log("Oh stop???");
+    console.log("Oh stop???");
+    ovo.draggingItems.length = 0;
+    ovo.chainModel_1.draggingJoints.length = 0;
+    
+    ovo.springball.isDragging = false;
+    
   } );
     
-    document.addEventListener( 'pointerdown', pointerdown );  
+  document.addEventListener( 'pointerdown', pointerdown );  
     // document.addEventListener( 'pointerup', pointerup );  
     
     
       
-			function pointerdown( event ) {
+	function pointerdown( event ) {
 
-				event.preventDefault();
-        console.log("clicky");
-				// if ( enableSelection === true ) {
+		event.preventDefault();
+    console.log("clicky");
+		// if ( enableSelection === true ) {
 
-					const draggableObjects = ovo.dragControls.getObjects();
-					// draggableObjects.length = 0;
-          // dont clear, it breaks it, there must be some other thinking
-          // behind how the websites demo used a group instead
+			const draggableObjects = ovo.dragControls.getObjects();
+			// draggableObjects.length = 0;
+      // dont clear, it breaks it, there must be some other thinking
+      // behind how the websites demo used a group instead
           
-          const mouse = ovo.mouse;
-					mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-					mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+      const mouse = ovo.mouse;
+			mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+			mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-					ovo.raycaster.setFromCamera( mouse, ovo.camera );
+			ovo.raycaster.setFromCamera( mouse, ovo.camera );
 
-					const intersections = ovo.raycaster.intersectObjects( ovo.pickables, false );
+			const intersections = ovo.raycaster.intersectObjects( ovo.pickables, false );
 
-					if ( intersections.length > 0 ) {
-console.log("have!?");
-// ovo.orbitControl.enabled = false;
+			if ( intersections.length > 0 ) {
+        console.log("have!?");
+        // ovo.orbitControl.enabled = false;
 
-						const wobject = intersections[ 0 ].object;
-            console.log(wobject);
-            // 
-						// if ( group.children.includes( object ) === true ) {
-            // 
-						// 	object.material.emissive.set( 0x000000 );
-						// 	scene.attach( object );
-            // 
-						// } else {
-            // 
-						// 	object.material.emissive.set( 0xaaaaaa );
-						// 	group.attach( object );
-            // 
-						// }
-
-						// ovo.dragControls.transformGroup = true;
-						// draggableObjects.push( group );
-						draggableObjects.push( wobject );
-
-					}
-          // 
-					// if ( group.children.length === 0 ) {
-          // 
-					// 	controls.transformGroup = false;
-					// 	draggableObjects.push( ...objects );
-          // 
-					// }
-
+				const wobject = intersections[ 0 ].object;
+        console.log(wobject);
+        // 
+				// if ( group.children.includes( object ) === true ) {
+        // 
+				// 	object.material.emissive.set( 0x000000 );
+				// 	scene.attach( object );
+        // 
+				// } else {
+        // 
+				// 	object.material.emissive.set( 0xaaaaaa );
+				// 	group.attach( object );
+        // 
 				// }
 
-				// render();
-
+				// ovo.dragControls.transformGroup = true;
+				// draggableObjects.push( group );
+				draggableObjects.push( wobject );
+        ovo.draggingItems.add(wobject);
+        ovo.chainModel_1.draggingJoints.add(wobject);
+        ovo.chainModel_1.setTargetJoint(wobject);
+        
+        if(wobject === ovo.springball){
+          
+          ovo.springball.isDragging = true;
+        }
+        
 			}
+      // 
+			// if ( group.children.length === 0 ) {
+      // 
+			// 	controls.transformGroup = false;
+			// 	draggableObjects.push( ...objects );
+      // 
+			// }
+
+  		// }
+
+  		// render();
+
+		}
       
       // function pointerup(ev) {
       //   event.preventDefault();
@@ -460,6 +525,9 @@ console.log("have!?");
     // 
     // }
     
+    for (var i = 0; i < ovo.animationPool.length; i++) {
+      ovo.animationPool[i].update();
+    }
 
     if(ovo.usePostProcessing){
       ovo.composer.render();
@@ -478,7 +546,12 @@ console.log("have!?");
       // ovo.renderer.render( ovo.scene, ovo.camera );
     }
     
+    
+    
   }
+  
+  
+  
   animate();
   
   // need to set a global object to use since justy passing an argument is not working
