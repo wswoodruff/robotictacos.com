@@ -5,6 +5,7 @@
   "main": "build/index.html",
   "type": "module",
   "scripts": {
+    "dev": "vite run",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx vite build --config ./vite.config.js",
     "deploy": "git subtree pull --prefix dist origin gh-pages && git subtree push --prefix dist origin gh-pages"
@@ -21,11 +22,11 @@
   "homepage": "https://github.com/wswoodruff/robotictacos-site#readme",
   "dependencies": {
     "dist": "^0.1.2",
+    "sass": "^1.81.0",
     "three": "^0.160.0",
     "vite-plugin-static-copy": "^1.0.1"
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1",
-    "vite": "^5.0.11"
+    "gh-pages": "^6.1.1"
   }
 }

@@ -18,6 +18,7 @@ export default {
       rollupOptions: {
         input: {
           main: './index.html',
+          main222: './index222.html',
           tacos: './indextacos.html',
           rock: './indexrock.html',
           dogskate: './index_dogskate.html',
