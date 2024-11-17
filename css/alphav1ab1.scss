@@ -37,7 +37,14 @@ video{
   width: 100%;
 }
 
-#super-main{
+// #super-main{
+//   max-width: 900px;
+//   max-width: 1200px;
+//   margin: 0 auto;
+//   width: 100%;
+// }
+
+@mixin centeryou{
   max-width: 900px;
   max-width: 1200px;
   margin: 0 auto;
@@ -45,30 +52,43 @@ video{
 }
 
 #header-of-devine{
-
+  // background-color: orange;
+  position: relative;
   h1{
     /* font-family: 'Gurajada', sans-serif; */
     font-family: 'Bebas Neue', sans-serif;
     font-size: 6rem;
     padding: 0;
-    line-height: 0;
+    line-height: 1;
     text-transform: uppercase;
     // padding-left: 1em;
     // color: #f0dc00;
     color: var(--nnsh333);
     margin: 0.5em 0;
+    margin: 0;
+    // position: relative;
   }
 
   h2{
     font-weight: 700;
     color: #f0dc;
-    font-size: 2rem;
-    padding-left: 9em;
+    font-size: 1.8rem;
+    // padding-left: 9em;
+    max-width: 700px;
+    // margin: -100px 0 0 0;
+  }
+  .titles{
+    display: flex;
+    padding-left: 2em;
+    h1{
+      width: 700px;
+    }
   }
 
   #robo-buddy{
     position: absolute;
-    top: 140px;
+    top: 90px;
+    left: 40px;
   }
 
 }
@@ -76,15 +96,20 @@ video{
 
 #acatgoofabat{
   margin-top: 100px;
+  // padding-top: 100px;
+  background-color: var(--nnsh111);
+
 
   // h2.title{
   //   padding-left: 2em;
   // }
   #can-a-title-moo{
+
     font-size: 3rem;
     font-weight: 900;
     // background-color: var(--nnsh444);
     padding: 1em;
+    // margin-top: 140px;
     color: var(--nnsh555);
     text-transform: uppercase;
   }
@@ -92,35 +117,84 @@ video{
   #of-two-window-bases{
     display: flex;
     align-items: flex-start;
-
+    // @include centeryou;
+    // padding: 8em 0;
     // padding-left: 400px;
     .featured{
       width: 400px;
+    }
+    #aboutsomevrrr{
+      max-width: 400px;
+      padding: 2em;
+      h3{
+        font-size: 2rem;
+        margin-bottom: 0;
+      }
+      p{
+        margin-top: 0;
+        font-size: 1.7rem;
+      }
+      // font-weight: 900;
     }
   }
   #a-of-spend-now{
     // flex: 0 0 630px;
     // flex-grow: 1;
+    margin-left: 2em;
 
+    #vontitle-783{
+        margin-top: -0.879em;
+    }
+
+    .am-i-a-title{
+      margin: 0;
+      font-family: 'GrandSlamScript-Regular', Helvetica, Arial, Sans-Serif;
+      font-size: 7rem;
+      color: var(--nnsh444);
+      // text-shadow: 4px 3px 0px #000000;
+      // font-kerning: none;
+      text-shadow: 4px 3px 0px #eeff00;
+      // letter-spacing: 0.05em;
+    }
+    #some-about-73{
+      font-weight: 900;
+      font-size: 1.6rem;
+    }
   }
   #points-list-1{
-    margin-left: 0.5em;
     list-style-type: none;
     padding: 0;
     // list-style-image: url("/images/arrow02.png");
     font-size: 2.78723rem;
     li{
       font-family: 'Bebas Neue', sans-serif;
-      // color: blue;
-      color: var(--nnsh555);
+      color: blue;
+      color: #6823ff;
+      // color: var(--nnsh555);
       // color: white;
       // padding-left: 2em;
       // list-style-image: url("/images/arrow02.png");
+      position: relative;
       img{
         display: inline-block;
         margin: 0 28px 0 0;
         width: 40px;
-
+        // transform: rotate(-180deg);
+        // right: 30%;
+        // position: absolute;
+      }
+      &:nth-child(1){
+        transform: rotate(-180deg);
+      }
+      &:nth-child(even){
+        img{
+          // transform: rotate(-180deg);
+        }
+      }
+    }
+    li:last-child{
+      img{
+        transform: rotate(-270deg);
       }
     }
     // li:before {
@@ -150,10 +224,27 @@ video{
   }
 
   #stack-vids-1{
+    position: relative;
+    // border: solid 4px blue;
     video{
       max-width: 160px;
       margin: -4px;
       padding: 0;
+    }
+    video:nth-child(1){
+        position: absolute;
+        right: 20px;
+        top: -380px;
+    }
+    video:nth-child(2){
+        position: absolute;
+        right: 140px;
+        top: -280px;
+    }
+    video:nth-child(3){
+        position: absolute;
+        right: 216px;
+        top: -160px;
     }
     // .featured{
     //   max-width: 400px;
@@ -431,3 +522,19 @@ background: linear-gradient(180deg, rgba(255,126,0,0.2) 20%, rgba(255,186,0,1) 1
 *{
   border: solid 1px green;
 } */
+
+
+
+.resizable-box {
+  // width: 200px;
+  // height: 100px;
+  // background-color: #2ecc71;
+  color: white;
+  // display: flex;
+  justify-content: center;
+  align-items: center;
+  // border: 2px solid #27ae60;
+  position: relative; /* Required for the resize handle */
+  overflow: hidden; /* Prevent content overflow during resize */
+  user-select: none; /* Prevent text selection while resizing */
+}
