@@ -1,18 +1,21 @@
 // vite.config.js
 import { viteStaticCopy as Copy } from 'vite-plugin-static-copy'
 import path from 'path';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+
 
 export default {
     plugins: [
-        Copy({
-            targets: [
-                { src: './CNAME', dest: '.' },
-                { src: './models', dest: '.' },
-                { src: './videos', dest: '.' },
-                { src: './svgs', dest: '.' },
-                { src: './images', dest: '.' }
-            ]
-        })
+      svelte(),
+      Copy({
+          targets: [
+              { src: './CNAME', dest: '.' },
+              { src: './models', dest: '.' },
+              { src: './videos', dest: '.' },
+              { src: './svgs', dest: '.' },
+              { src: './images', dest: '.' }
+          ]
+      })
     ],
     build: {
       rollupOptions: {

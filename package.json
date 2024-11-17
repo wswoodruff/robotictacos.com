@@ -21,8 +21,10 @@
   },
   "homepage": "https://github.com/wswoodruff/robotictacos-site#readme",
   "dependencies": {
+    "@sveltejs/vite-plugin-svelte": "^4.0.1",
     "dist": "^0.1.2",
     "sass": "^1.81.0",
+    "svelte": "^5.2.2",
     "three": "^0.160.0",
     "vite-plugin-static-copy": "^1.0.1"
   },

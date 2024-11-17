@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboticTacos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Gurajada&display=swap" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="/webfonts/grandslam/grand-slam-script-regular.css" type="text/css" charset="utf-8" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- <link rel="stylesheet" href="./css/alphav1ab1.css"> -->
+    <link rel="stylesheet" href="./css/alphav1ab1.scss">
+
+    <!-- defaulting to a plugin for now for some quick effects -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <script type="module">
+      import { mount } from 'svelte';
+      import App from './components/tacos.svelte';
+      // using svelte 5
+      const app = mount(App, { target: document.getElementById("aaa") });
+
+    </script>
+
+  </head>
+  <body>
+
+    <div id="aaa"></div>
+
+
+  </body>
+</html>
