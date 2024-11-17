@@ -22,6 +22,7 @@ export default {
         input: {
           main: './index.html',
           main222: './index222.html',
+          main222fun: './index222fun.html',
           tacos: './indextacos.html',
           rock: './indexrock.html',
           dogskate: './index_dogskate.html',
