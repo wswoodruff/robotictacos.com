@@ -8,11 +8,15 @@ requires you create a new token
 
 npx vite
 npx vite build
+npx vite deploy
+it will also nag about git add .
+git commit -m "skdjnf"
+:x save
 
 https://github.com/wswoodruff/robotictacos.com/actions
 
 not sure actions works
-edit vite.config.js 
+edit vite.config.js
 build: {
   rollupOptions: {
     input: {

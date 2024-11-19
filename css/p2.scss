@@ -1,0 +1,304 @@
+
+:root{
+  --rish: #FE0879;
+  --pinkish: #FF82E2;
+  --yellowish: #FED715;
+  --drkblueish: #0037B3;
+  --yepcyan: #70BAFF;
+  --y-11: #ffeb9a;
+
+  --nnsh111: #E08F48;
+  --nnsh111: #63ff9f;
+  --nnsh222: #BF48E0;
+  --nnsh333: #f9f604;
+  --nnsh444: #1DBEE0;
+  --nnsh555: #0e75d7;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+html {font-size: 100%;}
+
+body{
+  margin: 0;
+  padding: 0;
+  /* font-size: calc(66.5%/16); */
+
+  font-family: 'Nanum Gothic', sans-serif;
+  // background-color: var(--nnsh111);
+}
+
+
+
+
+video{
+  width: 100%;
+}
+
+// #super-main{
+//   max-width: 900px;
+//   max-width: 1200px;
+//   margin: 0 auto;
+//   width: 100%;
+// }
+
+@mixin centeryou{
+  max-width: 900px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+
+
+#minirobot{
+  width: 100px;
+}
+
+#header-of-devine{
+  // background-color: orange;
+  position: relative;
+  h1{
+    /* font-family: 'Gurajada', sans-serif; */
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 6rem;
+    padding: 0;
+    line-height: 1;
+    text-transform: uppercase;
+    // padding-left: 1em;
+    // color: #f0dc00;
+    color: var(--nnsh333);
+    margin: 0.5em 0;
+    margin: 0;
+    // position: relative;
+  }
+
+  h2{
+    font-weight: 700;
+    color: #f0dc;
+    font-size: 1.8rem;
+    // padding-left: 9em;
+    max-width: 700px;
+    // margin: -100px 0 0 0;
+  }
+  .titles{
+    display: flex;
+    padding-left: 2em;
+    h1{
+      width: 700px;
+    }
+  }
+
+  #robo-buddy{
+    position: absolute;
+    top: 90px;
+    left: 40px;
+  }
+
+}
+
+
+.of-two-window-bases{
+  // display: flex;
+  // align-items: flex-start;
+  // @include centeryou;
+  // padding: 8em 0;
+  // padding-left: 400px;
+  margin: 0 auto;
+  max-width: 800px;
+  width: 100%;
+
+  .featured{
+    width: 400px;
+  }
+  .aboutsomevrrr{
+    max-width: 400px;
+    padding: 2em;
+    h3{
+      font-size: 2rem;
+      margin-bottom: 0;
+    }
+    p{
+      margin-top: 0;
+      font-size: 1.7rem;
+    }
+    // font-weight: 900;
+  }
+}
+
+.cat-bat-lap{
+  display: flex;
+  // align-items: flex-start;
+}
+
+
+.a-of-spend-now{
+  // flex: 0 0 630px;
+  // flex-grow: 1;
+  // margin-left: 2em;
+
+  text-align: center;
+
+  .am-i-a-title{
+    margin: 0;
+    font-family: 'GrandSlamScript-Regular', Helvetica, Arial, Sans-Serif;
+    font-size: 7rem;
+    color: var(--nnsh444);
+    // text-shadow: 4px 3px 0px #000000;
+    // font-kerning: none;
+    text-shadow: 4px 3px 0px #eeff00;
+    // letter-spacing: 0.05em;
+  }
+  .some-about{
+    font-weight: 900;
+    font-size: 1.6rem;
+  }
+}
+
+
+
+
+
+#a-nav{
+  display: flex;
+  list-style-type: none;
+  /* position: fixed; */
+  background: white;
+  z-index: 1;
+  top: 0px;
+  padding: 1em;
+  padding-left: 2em;
+  margin: 0;
+  width: 100%;
+}
+#a-nav > *{
+  margin-right: 2em;
+}
+#a-nav a:link{
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+#resume-a{
+  /* display: none; */
+  position: relative;
+}
+
+#threedee1{
+  width: 100%;
+  height: 600px;
+  /* background: green; */
+  position: relative;
+  top: 0;
+}
+
+#resume-a video{
+  width: 100%;
+}
+
+
+
+// #videowall{
+.videowall{
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  /* display: flex; */
+  /* display: grid; */
+  /* grid-template-columns: repeat(7, 0fr); */
+
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  /* justify-content: center; */
+  /* gap: 0px; */
+
+  /* flex-direction: row; */
+
+ /* justify-content: flex-start; */
+ /* align-content: stretch; */
+
+   margin-top: 4em;
+  position: relative;
+  // background: white;
+  // z-index: 4;
+  // display: flex;
+  video{
+    /* width:200px; */
+    /* width:12%; */
+    // width:calc(100%/4);
+
+    /* object-fit: cover; */
+    /* max-width: 100%; */
+    /* height: auto; */
+    /* vertical-align: middle; */
+
+
+    /* float: left; */
+  /* flex: 0 0 auto; */
+
+    /* width:200px; */
+    /* height: 240px; */
+    display:inline-block;
+    // margin: 0;
+    // padding: 0;
+    // margin-bottom: -4px;
+    width: 120px;
+    // width:calc(100%/9);
+    margin: -3px;
+    position: relative;
+
+  }
+
+}
+
+
+
+video.iphone{
+    position: relative;
+  /* width: 26%; */
+  width: 100%;
+  max-width:320px;
+  /* width:200%; */
+  /* min-height: 600px; */
+  /* background-size: cover; */
+  background-color: orange;
+  background: rgb(255,126,0);
+background: linear-gradient(180deg, rgba(255,126,0,0.2) 20%, rgba(255,186,0,1) 100%);
+
+  border-radius:60px;
+  align-self: start;
+  margin-right: 2em;
+  /* padding-right:2em; */
+  /* padding: 0 8em; */
+  /* margin-top: -4em; */
+  /* margin-right: -2em; */
+
+  padding: 0em 1em 1em 0;
+
+
+
+    /* mask-image:url('../svgs/thing1.svg');
+    mask-position:center center;
+    mask-repeat:no-repeat;
+    mask-size:cover; */
+
+}
+
+//
+//
+// @media screen and (min-width: 769px) {
+//   #videowall video{
+//     width:calc(100%/8);
+//   }
+// }
+
+
+
+/*
+*{
+  border: solid 1px green;
+} */

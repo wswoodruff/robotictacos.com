@@ -9,9 +9,9 @@ body{
   margin: 0;
   padding: 0;
   /* font-size: calc(66.5%/16); */
-  
+
   font-family: 'Nanum Gothic', sans-serif;
-  
+
 }
 
 #wrapperlite{
@@ -63,9 +63,10 @@ video{
 }
 
 #a-nav{
-  display: flex;
+  /* display: grid; */
   list-style-type: none;
   /* position: fixed; */
+  position: relative;
   background: white;
   z-index: 1;
   top: 0px;
@@ -73,6 +74,9 @@ video{
   padding-left: 2em;
   margin: 0;
   width: 100%;
+}
+#a-nav li{
+  display: inline-block;
 }
 #a-nav > *{
   margin-right: 2em;
@@ -126,25 +130,25 @@ h2{
 #projects .item-type-1 {
   display: grid;
   justify-content: center;
-  grid-template-columns: 1fr 1fr; 
+  grid-template-columns: 1fr 1fr;
   /* grid-template-rows: 1fr 1fr;  */
   gap: 100px 100px;
   margin-bottom: 8em;
-  
+
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: normal;
   align-content: normal;
-  
+
 }
 #projects .item-type-1 {
   /* background-attachment: fixed; */
   /* background-size: cover; */
 }
 #projects .item-type-1 video.funky{
-    
+
   /* width: 26%; */
   width: 100%;
   max-width:440px;
@@ -157,13 +161,13 @@ h2{
   /* padding: 0 8em; */
   /* margin-top: -4em; */
   /* margin-right: -2em; */
-    
+
 
     mask-image:url('../svgs/thing1.svg');
     /* mask-position:center center; */
     mask-repeat:no-repeat;
     mask-size:cover;
-    
+
     /* padding: 1em 1em 1em 0; */
 
 }
@@ -190,10 +194,10 @@ h2{
   /* mask-position:center center; */
   mask-repeat:no-repeat;
   mask-size:cover;
-  
+
   background: rgb(255,126,0);
 background: linear-gradient(180deg, rgba(255,126,0,0.2) 20%, rgba(255,186,0,1) 100%);
-  
+
 }
 
 #projects .item-type-1 video.iphone{
@@ -215,10 +219,10 @@ background: linear-gradient(180deg, rgba(255,126,0,0.2) 20%, rgba(255,186,0,1) 1
   /* padding: 0 8em; */
   /* margin-top: -4em; */
   /* margin-right: -2em; */
-  
+
   padding: 0em 1em 1em 0;
-  
-    
+
+
 
     /* mask-image:url('../svgs/thing1.svg');
     mask-position:center center;
@@ -245,7 +249,7 @@ background: linear-gradient(180deg, rgba(255,126,0,0.2) 20%, rgba(255,186,0,1) 1
   /* padding: 0 8em; */
   padding: 8em 2em 0 1em;
   max-width: 600px;
-  
+
 }
 #projects .item-type-1 article h2{
   font-family: 'Bebas Neue', sans-serif;
@@ -256,7 +260,7 @@ background: linear-gradient(180deg, rgba(255,126,0,0.2) 20%, rgba(255,186,0,1) 1
   /* font-weight: 700; */
 }
 #projects .item-type-1 article ul{
-  
+
   border-left: solid 1px #aaeeff;
   margin-top: -0.2em;
   padding: 0.5em 1em 4em 0.5em;
@@ -284,17 +288,17 @@ background: linear-gradient(180deg, rgba(255,126,0,0.2) 20%, rgba(255,186,0,1) 1
   /* display: flex; */
   /* display: grid; */
   /* grid-template-columns: repeat(7, 0fr); */
-  
+
   /* display: flex; */
   /* flex-wrap: wrap; */
   /* justify-content: center; */
   /* gap: 0px; */
-  
+
   /* flex-direction: row; */
- 
+
  /* justify-content: flex-start; */
  /* align-content: stretch; */
-  
+
   position: relative;
   background: white;
   z-index: 4;
@@ -304,16 +308,16 @@ background: linear-gradient(180deg, rgba(255,126,0,0.2) 20%, rgba(255,186,0,1) 1
   /* width:200px; */
   /* width:12%; */
   width:calc(100%/4);
-  
+
   /* object-fit: cover; */
   /* max-width: 100%; */
   /* height: auto; */
   /* vertical-align: middle; */
-  
-  
+
+
   /* float: left; */
 /* flex: 0 0 auto; */
-  
+
   /* width:200px; */
   /* height: 240px; */
   display:inline-block;
@@ -329,7 +333,7 @@ background: linear-gradient(180deg, rgba(255,126,0,0.2) 20%, rgba(255,186,0,1) 1
 }
 
 
-/* 
+/*
 *{
   border: solid 1px green;
 } */
