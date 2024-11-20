@@ -7,12 +7,16 @@ requires you create a new token
 - npm run deploy
 
 npx vite
-npx vite build
-npx vite deploy
-it will also nag about git add .
+
+delete dist
+npm run build
+git add .
 git commit -m "skdjnf"
+npm run deploy
+it will also nag about
 :x save
 
+visit
 https://github.com/wswoodruff/robotictacos.com/actions
 
 not sure actions works
