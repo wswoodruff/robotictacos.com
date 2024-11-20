@@ -1,1 +1,0 @@
-import"./modulepreload-polyfill-B5Qt9EMX.js";/* empty css                                  *//* empty css                   */import{a as e,t as m,m as r}from"./render-CedG772K.js";import"./legacy-B3RcDfCK.js";var s=m('<h1 class="svelte-1hzsr80"></h1>');function n(a){let o="Howdy from Tacos!!!";var t=s();t.textContent=o,e(a,t)}r(n,{target:document.getElementById("aaa")});

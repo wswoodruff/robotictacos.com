@@ -8,6 +8,7 @@
   --nnsh555: #0e75d7;
 
   --left: 20em;
+  // --left: 40em;
 
   --nnsh444: #1DBEE0;
 }
@@ -30,7 +31,7 @@ body{
   // max-width: 57em;
   // max-width: 400px;
   // max-width: 80em;
-  max-width: 900px;
+  max-width: 1000px;
 }
 
 #header-of-devine{
@@ -80,11 +81,20 @@ body{
   display: flex;
   @include centeryou;
   align-items: center;
+
+  position: sticky;
+  top: 0;
+  background: white;
+  background: #fffffff0;
+  /* border: solid 2px blue; */
+  z-index: 1;
+
   h3{
     color: silver;
     margin-right: 1em;
   }
   button{
+    cursor: pointer;
     border: none;
     // padding: 2em 0 1em 0;
     // hhhhhmmmmmmmmmmmmmmmmmmmmmm
@@ -96,6 +106,30 @@ body{
     font-size: 1.1rem;
     padding-top: var(--top);
     padding-bottom: var(--top);
+    color: black;
+    transition: color 0.2s;
+    position: relative;
+    &:hover{
+      border: solid 1px #eee;
+      border-radius: 8px;
+      color: orange;
+    }
+    &.selected{
+      // border-bottom: solid 2px black;
+    }
+    &.selected::after {
+      content: '';
+      position: absolute;
+      // top: 100%; /* Position below the element */
+      top: 70%; /* Position below the element */
+      left: 50%;
+      // width: 8px;
+      transform: translateX(-50%);
+      border-width: 6px; /* Size of the triangle */
+      border-style: solid;
+      // border-color: black transparent transparent transparent;
+      border-color: transparent transparent black transparent;
+    }
   }
   button img{
     width: 80px;
@@ -126,6 +160,34 @@ body{
   section{
     padding-left: 2em;
     border-left: solid 1px #eee;
+    & p:first-of-type{
+      font-weight: 600;
+    }
+    ul.copy-list{
+      padding-left: 1em;
+    }
+    ul.tags-noise{
+      padding: 0;
+      font-size: 0.9rem;
+      color: var(--nnsh555);
+      // need otherwise the li margin breaks the visual align grid
+      margin-left: 10px;
+      li{
+        padding: 0.4em;
+        padding: 0.4em 0.8em;
+        display: inline-block;
+        border: solid 1px var(--nnsh555);
+        border-radius: 4px;
+        margin: 0.1em;
+        margin-left: -10px;
+        top: -10px;
+      }
+    }
+    video{
+      width: 140px;
+      // display: inline-block;
+      // margin-right: -5px;
+    }
   }
   aside{
     position: absolute;
@@ -137,6 +199,13 @@ body{
     .featured-video{
       width: var(--vwidth);
       // margin-top: 4em;
+    }
+    video{
+      display: block;
+    }
+    img{
+      width: var(--vwidth);
+
     }
   }
 }

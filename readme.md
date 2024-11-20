@@ -12,6 +12,8 @@ delete dist
 npm run build
 git add .
 git commit -m "skdjnf"
+git commit -am "^#%^#"
+
 npm run deploy
 it will also nag about
 :x save

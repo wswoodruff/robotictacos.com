@@ -21,9 +21,11 @@
     <script src="https://unpkg.com/scrollreveal"></script>
 
 
-    <script type="module" crossorigin src="/assets/modulepreload-polyfill-B5Qt9EMX.js"></script>
-    <script type="module" crossorigin src="/assets/legacy-B3RcDfCK.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index_min-Dhe73x_G.css">
+
+    <script type="module" crossorigin src="/assets/index_min-Cj72HDo2.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+    <link rel="modulepreload" crossorigin href="/assets/legacy-Cas9PMI3.js">
+    <link rel="stylesheet" crossorigin href="/assets/index_min-LcOfxgge.css">
     <link rel="stylesheet" crossorigin href="/assets/grand-slam-script-regular-aF3rhyMy.css">
     <link rel="stylesheet" crossorigin href="/assets/nav-all-lsXLAMt2.css">
   </head>
@@ -78,11 +80,11 @@
         </button>
       </section> -->
       <h3>Devs</h3>
-      <section>
-        <button type="button"> Nick </button>
+      <section id="crew-dragon">
+        <button type="button" class="selected"> Nick </button>
       </section>
 
-      <section>
+      <section id="crew-bill">
         <button type="button"> Bill </button>
       </section>
 
@@ -94,57 +96,59 @@
 
       <div id="content-nick">
 
-        <article>
-          <section>
-            <h3>SpaceMittens</h3>
-            <p>A Virtual Reality Network Party app built on Oculus Quest. It was featured in many many places one being NYC Tribeca Film Festival.</p>
-            <p>Attendees interact as 3d space beings using hand tracking technology and gestures to create interesting objects to play with</p>
-            <ul>
-              <li>Full developer for VR Networked dance party in VR built in Unity</li>
-              <li>Full design of 3d models</li>
-              <li>Attendees interact as 3d space beings using hand tracking technology and gestures to create interesting objects to play with</li>
-              <li>Hands when posed in a fashion produce live painting shapes to further share around. Optimized for mobile oculus quest</li>
-              <li>Might be available in the AppLabs store in the future</li>
-            </ul>
-          </section>
-          <aside>
-            <video muted="true" autoplay="true" loop class="featured-video">
-              <source src="https://cdn.glitch.global/a4a18359-54bf-415e-86f0-691a7faa51bf/vr1.mp4" type="video/mp4" />
-                Your browser does not support the video tag guesses.
-            </video>
-          </aside>
-        </article>
-
-
-        <article>
-          <section>
-            <h3>Creative Portland</h3>
-            <p>A native iOS app shipped to the Apple AppStore for Portland Maine</p>
-            <ul>
-              <li>Native iOS app using Swift & Obj-C</li>
-              <li>Available in the App Store <a href="https://apps.apple.com/us/app/creative-portland/id1616251584">linky</a></li>
-              <li>Database backend driven</li>
-              <li>Native user notifications for showtimes</li>
-              <li>Events finding and discovery</li>
-              <li>Favorites bookmarking</li>
-              <li>Live Searching</li>
-              <li>Multi options map</li>
-            </ul>
-          </section>
-          <aside>
-            <video id="creative-iphone" muted="true" autoplay="true" loop class="featured-video">
-              <source src="https://cdn.glitch.global/a4a18359-54bf-415e-86f0-691a7faa51bf/iphone1.mp4?v=1705020740668" type="video/mp4" />
-                Your browser does not support the video tag guesses.
-            </video>
-          </aside>
-        </article>
-
 
       </div>
       <!-- id="content-nick" -->
 
+
+      <div class="content-bill">
+        <article class="">
+          <h2>Bill!!</h2>
+
+        </article>
+      </div>
+
+
     </div>
 
+
+
+<script type="text/javascript">
+
+  let selected = "dragon"; // dragon, bill
+
+  function toggle(ev) {
+    if (selected === "dragon") {
+      selected = "bill";
+    }
+    else if (selected === "bill") {
+      selected = "dragon";
+    }
+    console.log("selected", selected);
+  }
+
+  function selectName(name) {
+    selected = name;
+    console.log("selected", selected);
+  }
+
+  function build() {
+    const toggle0 = document.querySelector('#spacecrew #crew-dragon button');
+    toggle0.addEventListener('click', function(ev) {
+      console.log("evvvv", ev);
+      // toggle(ev);
+      selectName("dragon");
+    });
+    const toggle1 = document.querySelector('#spacecrew #crew-bill button');
+    toggle1.addEventListener('click', function(ev) {
+      console.log("evvvv", ev);
+      // toggle(ev);
+      selectName("bill");
+    });
+  }
+
+  build();
+</script>
 
   </body>
 
