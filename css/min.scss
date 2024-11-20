@@ -1,0 +1,153 @@
+
+:root{
+  --nnsh111: #E08F48;
+  --nnsh111: #63ff9f;
+  --nnsh222: #BF48E0;
+  --nnsh333: #f9f604;
+  --nnsh444: #1DBEE0;
+  --nnsh555: #0e75d7;
+
+  --left: 20em;
+
+  --nnsh444: #1DBEE0;
+}
+
+body{
+  line-height: 1.8;
+}
+@mixin centeryou{
+  // max-width: 900px;
+  // max-width: 1200px;
+  // margin: 0 auto;
+  // width: 100%;
+  // padding: 0 2em 0 8em;
+  // padding: 0 2em 0 20%;
+  // padding: 0 2em 0 20vw;
+  // padding: 0 20vw 0 10vw;
+  padding: 0 20vw 0 var(--left);
+  padding: 0 2em 0 var(--left);
+  // hhhhhmmmmmmmmmmmmmmmmmmmmmm
+  // max-width: 57em;
+  // max-width: 400px;
+  // max-width: 80em;
+  max-width: 900px;
+}
+
+#header-of-devine{
+  margin-top: 3em;
+  @include centeryou;
+  h1{
+    font-size: 1.2rem;
+    font-size: 2.1rem;
+    text-transform: uppercase;
+    font-family: 'Bebas Neue', sans-serif;
+    margin-bottom: 0;
+    margin-top: 0;
+    line-height: 1;
+  }
+
+  #multilogos {
+    --t: -0.5em;
+    h1:nth-child(1){
+      color: #f0dc00;
+      /* color: linear-gradient(120deg, #eaee44, #33d0ff); */
+      /* background-image: linear-gradient(120deg, #eaee44, #33d0ff); */
+    }
+    h1:nth-child(2){
+      color: #bbdd25;
+      margin-top: var(--t);
+    }
+    h1:nth-child(3){
+      color: #1bd14d;
+      margin-top: var(--t);
+    }
+    h1:nth-child(4){
+      color: #2977be;
+      margin-top: var(--t);
+    }
+  }
+
+  h2{
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0.5em;
+    padding-right: 4em;
+  }
+}
+
+#spacecrew{
+  --top: 0.5em;
+  display: flex;
+  @include centeryou;
+  align-items: center;
+  h3{
+    color: silver;
+    margin-right: 1em;
+  }
+  button{
+    border: none;
+    // padding: 2em 0 1em 0;
+    // hhhhhmmmmmmmmmmmmmmmmmmmmmm
+    background: none;
+    border-bottom: solid 1px silver;
+    margin: 0 0.2em;
+    // background: blue;
+    min-width: 80px;
+    font-size: 1.1rem;
+    padding-top: var(--top);
+    padding-bottom: var(--top);
+  }
+  button img{
+    width: 80px;
+    height: 80px;
+  }
+}
+
+
+#c0ntent{
+  margin-top: 2em;
+  // --hrmleft: -2em;
+
+  article{
+    @include centeryou;
+    position: relative;
+    margin-bottom: 4em;
+    h3{
+      font-family: 'GrandSlamScript-Regular', Helvetica, Arial, Sans-Serif;
+      font-size: 2rem;
+      margin-top: 0em;
+      margin-bottom: 0;
+
+      color: var(--nnsh444);
+      // text-shadow: 4px 3px 0px #eeff00;
+      // text-shadow: 0px 1em 0px #eeff00;
+    }
+  }
+  section{
+    padding-left: 2em;
+    border-left: solid 1px #eee;
+  }
+  aside{
+    position: absolute;
+    top: 0;
+    --vwidth: 200px;
+    margin-left: calc(-2em - var(--vwidth));
+    // order: -1; /* Move the video to the start of the flex row visually */
+    // flex: 0 0 auto; /* Ensure the video doesn't stretch */
+    .featured-video{
+      width: var(--vwidth);
+      // margin-top: 4em;
+    }
+  }
+}
+
+
+
+// need a mask effect over the video
+#creative-iphone{
+  position: relative;
+  background-color: orange;
+  background: rgb(255,126,0);
+  background: linear-gradient(180deg, rgba(255,126,0,0.2) 20%, rgba(255,186,0,1) 100%);
+  border-radius:30px;
+}
