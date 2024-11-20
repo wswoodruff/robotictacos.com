@@ -20,12 +20,15 @@
     <!-- defaulting to a plugin for now for some quick effects -->
     <script src="https://unpkg.com/scrollreveal"></script>
 
+    <!-- <script src="./js/video-modal/video-modal.js"></script> -->
 
 
-    <script type="module" crossorigin src="/assets/index_min-Cj72HDo2.js"></script>
+
+
+    <script type="module" crossorigin src="/assets/index_min-BZATLL27.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
     <link rel="modulepreload" crossorigin href="/assets/legacy-Cas9PMI3.js">
-    <link rel="stylesheet" crossorigin href="/assets/index_min-LcOfxgge.css">
+    <link rel="stylesheet" crossorigin href="/assets/index_min-rreSqH0n.css">
     <link rel="stylesheet" crossorigin href="/assets/grand-slam-script-regular-aF3rhyMy.css">
     <link rel="stylesheet" crossorigin href="/assets/nav-all-lsXLAMt2.css">
   </head>
@@ -94,9 +97,8 @@
 
     <div id="c0ntent">
 
+      <!-- moved to file, buuuut does this break the app since it flashes to load -->
       <div id="content-nick">
-
-
       </div>
       <!-- id="content-nick" -->
 
@@ -112,43 +114,53 @@
     </div>
 
 
+    <div id="video-modal" class="modal hidden" onclick="closeVideo(event)">
+      <div class="video-container">
+        <video id="video-player" controls></video>
+        <button class="close-button" onclick="closeVideo()">×</button>
+      </div>
+    </div>
 
-<script type="text/javascript">
 
-  let selected = "dragon"; // dragon, bill
+    <script type="text/javascript">
 
-  function toggle(ev) {
-    if (selected === "dragon") {
-      selected = "bill";
-    }
-    else if (selected === "bill") {
-      selected = "dragon";
-    }
-    console.log("selected", selected);
-  }
+      let selected = "dragon"; // dragon, bill
 
-  function selectName(name) {
-    selected = name;
-    console.log("selected", selected);
-  }
+      function toggle(ev) {
+        if (selected === "dragon") {
+          selected = "bill";
+        }
+        else if (selected === "bill") {
+          selected = "dragon";
+        }
+        console.log("selected", selected);
+      }
 
-  function build() {
-    const toggle0 = document.querySelector('#spacecrew #crew-dragon button');
-    toggle0.addEventListener('click', function(ev) {
-      console.log("evvvv", ev);
-      // toggle(ev);
-      selectName("dragon");
-    });
-    const toggle1 = document.querySelector('#spacecrew #crew-bill button');
-    toggle1.addEventListener('click', function(ev) {
-      console.log("evvvv", ev);
-      // toggle(ev);
-      selectName("bill");
-    });
-  }
+      function selectName(name) {
+        selected = name;
+        console.log("selected", selected);
+      }
 
-  build();
-</script>
+      function build() {
+        const toggle0 = document.querySelector('#spacecrew #crew-dragon button');
+        toggle0.addEventListener('click', function(ev) {
+          console.log("evvvv", ev);
+          // toggle(ev);
+          selectName("dragon");
+        });
+        const toggle1 = document.querySelector('#spacecrew #crew-bill button');
+        toggle1.addEventListener('click', function(ev) {
+          console.log("evvvv", ev);
+          // toggle(ev);
+          selectName("bill");
+        });
+      }
+
+      build();
+
+
+
+    </script>
 
   </body>
 
