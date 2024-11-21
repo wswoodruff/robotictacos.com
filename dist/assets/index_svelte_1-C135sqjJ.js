@@ -1,1 +1,0 @@
-import"./modulepreload-polyfill-B5Qt9EMX.js";/* empty css                                  *//* empty css                   */import{a as o,t as m,m as r}from"./legacy-Cas9PMI3.js";var s=m('<h1 class="svelte-1hzsr80"></h1>');function n(a){let e="Howdy from Tacos!!!";var t=s();t.textContent=e,o(a,t)}r(n,{target:document.getElementById("aaa")});
