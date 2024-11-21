@@ -153,7 +153,7 @@
 <article>
   <section>
     <h3>Island Land & Maine Land / DriftSpace</h3>
-    <p>Island Land. Early consumer VR exploration project for tradeshows</p>
+    <p>Island Land. Early consumer VR exploration project for art galleries</p>
     <!-- <p><a href="https://www.mybodymodel.com/" target="_blank">Web link</a></p> -->
     <ul class="copy-list">
       <li>Team member for core Samsung Gear, Google Cardboard and iphone</li>
@@ -223,11 +223,11 @@
 <article>
   <section>
     <h3>Straight Talk Google VR</h3>
-    <p>Straight Talk Google VR.</p>
-    <p>VR Google cardboard powered game for tradeshow. Users unlocked keys in the games to showcase animations and branded messages</p>
-    <p>Client returned next year for some revisions for second tradeshow</p>
+    <p>Straight Talk Google VR. Google Cardboard android phone VR powered game for tradeshow.</p>
+    <p>Users unlocked keys in the games to showcase animations and branded messages</p>
     <!-- <p><a href="https://www.mybodymodel.com/" target="_blank">Web link</a></p> -->
     <ul class="copy-list">
+      <li>Client returned next year for some revisions for second tradeshow</li>
       <li>Limited hardware optimisations</li>
       <li>Light baking</li>
       <li>Multiple keyed animations in cue</li>

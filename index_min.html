@@ -32,15 +32,18 @@
       import Stackvids from './components/videos-stack.svelte';
       import Nav from './components/nav-all.svelte';
       import Bionick from './components/bios/bio-nick.svelte';
+      import ContactForm from './components/contact-form.svelte';
       // using svelte 5
       // const app = mount(App, { target: document.getElementById("aaa") });
       // const app = mount(Stackvids, { target: document.getElementById("s-stackvids") });
       // const nav = mount(Nav, { target: document.getElementById("s-nav") });
       const bionick = mount(Bionick, { target: document.getElementById("content-nick") });
 
+      const contactform = mount(ContactForm, { target: document.getElementById("contact-form") });
+
       import { openVideo, closeVideo } from './js/video-modal/video-modal.js';
       window.closeVideo = closeVideo;
-      
+
       const videos = document.querySelectorAll('video');
       // debugger
       // videos[4].querySelector('source').src
@@ -149,6 +152,7 @@
       </div>
     </div>
 
+    <div id="contact-form"></div>
 
     <script type="text/javascript">
 
