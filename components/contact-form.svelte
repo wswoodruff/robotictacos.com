@@ -114,6 +114,7 @@
       font-weight: 600;
       margin-top: 15px;
       /* background: orange; */
+      background: yellow;
       border: solid 2px blue;
       padding: 1em;
       z-index: 1;
@@ -155,18 +156,30 @@
       console.log(name, email, message);
 
       try {
-        const response = await fetch("http://localhost:3000/contact", {
+        // const response = await fetch("http://localhost:3000/contact", {
+        const response = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "access_key": "dec5f887-d3a3-4922-988e-de93891b0c80"
           },
           body: JSON.stringify({ name, email, message }),
         });
 
+        // const formData = new FormData(ev.target);
+        //
+        // formData.append("access_key", "dec5f887-d3a3-4922-988e-de93891b0c80");
+        //
+        // const response = await fetch("https://api.web3forms.com/submit", {
+        //   method: "POST",
+        //   body: formData
+        // });
+
         const data = await response.json();
 
         if (response.ok) {
-
+          showSuccess = true;
+          successMessage = " SENT!!";
           document.getElementById("response-message").textContent = data.message;
         } else {
           showError = true;
@@ -190,6 +203,7 @@
 
   <h2>Contact Robots</h2>
   <form id="contact-form">
+    <!-- <p id="success-message" class="response">{successMessage}</p> -->
     {#if showError}
       <p id="error-message" class="response">{errorMessage}</p>
       {:else if showSuccess}
