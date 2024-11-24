@@ -25,10 +25,10 @@
 
 
 
-    <script type="module" crossorigin src="/assets/index_min-zKeoQyNu.js"></script>
+    <script type="module" crossorigin src="/assets/index_min-CEZV7RAc.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
     <link rel="modulepreload" crossorigin href="/assets/legacy-Or67-pf7.js">
-    <link rel="stylesheet" crossorigin href="/assets/index_min-DUPw4YJ1.css">
+    <link rel="stylesheet" crossorigin href="/assets/index_min-CySnTtod.css">
     <link rel="stylesheet" crossorigin href="/assets/grand-slam-script-regular-aF3rhyMy.css">
     <link rel="stylesheet" crossorigin href="/assets/nav-all-lsXLAMt2.css">
   </head>
@@ -98,16 +98,15 @@
     <div id="c0ntent">
 
       <!-- moved to file, buuuut does this break the app since it flashes to load -->
-      <div id="content-nick">
+      <div id="content-nick" class="_bio-unselected">
       </div>
       <!-- id="content-nick" -->
 
 
-      <div class="content-bill">
-        <article class="">
-          <!-- <h2>Bill!!</h2> -->
-
-        </article>
+      <div id="content-bill" class="bio-unselected">
+        <!-- <article class="">
+          <h2>Bill!!</h2>
+        </article> -->
       </div>
 
 
@@ -121,6 +120,15 @@
       </div>
     </div>
 
+    <div id="image-modal" class="modal hidden" onclick="closeImage(event)">
+      <div class="image-container">
+        <img id="image-player" alt="" src="">
+        <!-- <video id="image-player" controls></video> -->
+        <button class="close-button" onclick="closeImage()">×</button>
+      </div>
+    </div>
+
+
     <div id="contact-form"></div>
 
     <script type="text/javascript">
@@ -130,6 +138,9 @@
       function toggle(ev) {
         if (selected === "dragon") {
           selected = "bill";
+
+          aa.classList.remove('bio-unselected');
+          bb.classList.add('bio-unselected');
         }
         else if (selected === "bill") {
           selected = "dragon";
@@ -140,6 +151,28 @@
       function selectName(name) {
         selected = name;
         console.log("selected", selected);
+        const aa = document.getElementById('content-nick');
+        const aa2 = document.querySelector('#crew-dragon button');
+        const bb = document.getElementById('content-bill');
+        const bb2 = document.querySelector('#crew-bill button');
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+        if (selected === "dragon") {
+          aa.classList.remove('bio-unselected');
+          bb.classList.add('bio-unselected');
+          bb2.classList.remove('selected');
+          aa2.classList.add('selected');
+        }
+        else if (selected === "bill") {
+          aa.classList.add('bio-unselected');
+          bb.classList.remove('bio-unselected');
+          aa2.classList.remove('selected');
+          bb2.classList.add('selected');
+        }
       }
 
       function build() {
