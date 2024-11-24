@@ -19,3 +19,25 @@ export function closeVideo(event) {
     modal.classList.add('hidden'); // Hide the modal
   }
 }
+
+
+
+export function openImage(src) {
+  const modal = document.getElementById('image-modal');
+  const player = document.getElementById('image-player');
+
+  player.src = src; // Set the video source
+  modal.classList.remove('hidden'); // Show the modal
+}
+
+// Function to close the modal
+export function closeImage(event) {
+  const modal = document.getElementById('image-modal');
+  const player = document.getElementById('image-player');
+
+  // Close only if clicking outside the video container or close button
+  if (!event || event.target === modal || event.target.classList.contains('close-button')) {
+    player.src = ''; // Reset the video source
+    modal.classList.add('hidden'); // Hide the modal
+  }
+}

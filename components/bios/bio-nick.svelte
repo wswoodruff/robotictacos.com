@@ -9,7 +9,7 @@
       <li>Full design of 3d models</li>
       <li>Attendees interact as 3d space beings using hand tracking technology and gestures to create interesting objects to play with</li>
       <li>Hands when posed in a fashion produce live painting shapes to further share around. Optimized for mobile oculus quest</li>
-      <li>Might be available in the AppLabs store in the future</li>
+      <!-- <li>Might be available in the AppLabs store in the future</li> -->
       <li>Featured at <em>Tribeca Film Festival</em></li>
     </ul>
     <!-- just visual noise -->
@@ -271,11 +271,25 @@
       <li>Promotion videos for project Gistify</li>
       <li>Promotion videos Music app</li>
     </ul>
+    <!-- <video poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
+      <source src="/videos/gistify_production.mp4" type="video/mp4" />
+        Your browser does not support the video tag guesses.
+    </video> -->
+
     <ul class="tags-noise">
       <li>javascript</li>
       <li>After Effects</li>
     </ul>
+
   </section>
+
+  <aside>
+    <video poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
+      <source src="/videos/gistify_production.mp4" type="video/mp4" />
+        Your browser does not support the video tag guesses.
+    </video>
+  </aside>
+
 </article>
 
 
@@ -482,7 +496,7 @@
       <source src="/videos/vrmultihands.mp4" type="video/mp4" />
         Your browser does not support the video tag guesses.
     </video>
-    <video poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
+    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
       <source src="/videos/circles_a.mp4" type="video/mp4" />
         Your browser does not support the video tag guesses.
     </video>

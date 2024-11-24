@@ -18,6 +18,9 @@ body{
   line-height: 1.8;
 }
 
+.bio-unselected{
+  display: none;
+}
 
 @mixin centeryou{
   // max-width: 900px;
