@@ -5,6 +5,7 @@ export function openVideo(videoSrc) {
 
   videoPlayer.src = videoSrc; // Set the video source
   modal.classList.remove('hidden'); // Show the modal
+  videoPlayer.play();
 }
 
 // Function to close the modal
@@ -117,14 +118,17 @@ export function bindModalDatas(){
   // debugger
   // videos[4].querySelector('source').src
   for (let i = 0; i < videos.length-1; i++) {
-    const vvv = videos[i].querySelector('source');
+    // const vvv = videos[i].querySelector('source');
     // console.log(vvv.src);
-    if (vvv.src) {
+    // if (vvv.src) {
       videos[i].addEventListener('click', function(ev) {
-        console.log("src", vvv.src);
-        openVideo(vvv.src)
+        const src = this.src;
+        // console.log("src", vvv.src);
+        // console.log("src", src);
+        // openVideo(vvv.src)
+        openVideo(src);
       })
-    }
+    // }
   }
 
   const portimages = document.querySelectorAll('[data-portimg]');

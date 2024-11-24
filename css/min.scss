@@ -198,6 +198,8 @@ body{
       width: 220px;
       // float: left;
       // margin-top: 4em;
+      height: auto;
+      // height: 100px;
     }
     video{
       display: block;
@@ -223,6 +225,18 @@ body{
       margin: 0.1em;
       margin-left: -10px;
       top: -10px;
+    }
+  }
+  .videostack{
+    video{
+      // width: 30%;
+      // width: 100px;
+      // width: 220px;
+      // float: left;
+      // margin-top: 4em;
+    }
+    video{
+      display: inline-block;
     }
   }
 }
