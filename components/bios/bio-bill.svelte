@@ -18,7 +18,7 @@
     </ul>
   </section>
   <aside>
-    <video poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
+    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
       <source src="./videos/bill_ui_vid_grlb82JEw5mV7_OC.mp4" type="video/mp4" />
         Your browser does not support the video tag guesses.
     </video>

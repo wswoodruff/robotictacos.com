@@ -43,37 +43,19 @@
 
       const contactform = mount(ContactForm, { target: document.getElementById("contact-form") });
 
-      import { openVideo, closeVideo, openImage, closeImage } from './js/video-modal/video-modal.js';
-      window.closeVideo = closeVideo;
-      window.closeImage = closeImage;
+      import { bindModalDatas, createModals } from './js/video-modal/video-modal.js';
+      import { buildtoggles } from './js/space-crew-toggles.js';
+      // window.closeVideo = closeVideo;
+      // window.closeImage = closeImage;
 
-      const videos = document.querySelectorAll('video');
-      // debugger
-      // videos[4].querySelector('source').src
-      for (let i = 0; i < videos.length-1; i++) {
-        const vvv = videos[i].querySelector('source');
-        // console.log(vvv.src);
-        if (vvv.src) {
-          videos[i].addEventListener('click', function(ev) {
-            console.log("src", vvv.src);
-            openVideo(vvv.src)
-          })
-        }
-      }
+      createModals();
 
-      const portimages = document.querySelectorAll('[data-portimg]');
-      console.log("portimages", portimages);
-      for (let i = 0; i < portimages.length; i++) {
-        // const vvv = videos[i].querySelector('source');
-        console.log(portimages[i].src);
-        if (portimages[i].src) {
-          portimages[i].addEventListener('click', function(ev) {
-            console.log("src", portimages[i].src);
-            openImage(portimages[i].src)
-          })
-        }
-      }
-      // debugger
+      bindModalDatas();
+
+
+
+            buildtoggles();
+
 
     </script>
 
@@ -160,7 +142,7 @@
     </div>
 
 
-    <div id="video-modal" class="modal hidden" onclick="closeVideo(event)">
+    <!-- <div id="video-modal" class="modal hidden" onclick="closeVideo(event)">
       <div class="video-container">
         <video id="video-player" controls></video>
         <button class="close-button" onclick="closeVideo()">×</button>
@@ -170,75 +152,14 @@
     <div id="image-modal" class="modal hidden" onclick="closeImage(event)">
       <div class="image-container">
         <img id="image-player" alt="" src="">
-        <!-- <video id="image-player" controls></video> -->
         <button class="close-button" onclick="closeImage()">×</button>
       </div>
-    </div>
+    </div> -->
 
 
     <div id="contact-form"></div>
 
     <script type="text/javascript">
-
-      let selected = "dragon"; // dragon, bill
-
-      function toggle(ev) {
-        if (selected === "dragon") {
-          selected = "bill";
-
-          aa.classList.remove('bio-unselected');
-          bb.classList.add('bio-unselected');
-        }
-        else if (selected === "bill") {
-          selected = "dragon";
-        }
-        console.log("selected", selected);
-      }
-
-      function selectName(name) {
-        selected = name;
-        console.log("selected", selected);
-        const aa = document.getElementById('content-nick');
-        const aa2 = document.querySelector('#crew-dragon button');
-        const bb = document.getElementById('content-bill');
-        const bb2 = document.querySelector('#crew-bill button');
-
-
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        })
-        if (selected === "dragon") {
-          aa.classList.remove('bio-unselected');
-          bb.classList.add('bio-unselected');
-          bb2.classList.remove('selected');
-          aa2.classList.add('selected');
-        }
-        else if (selected === "bill") {
-          aa.classList.add('bio-unselected');
-          bb.classList.remove('bio-unselected');
-          aa2.classList.remove('selected');
-          bb2.classList.add('selected');
-        }
-      }
-
-      function build() {
-        const toggle0 = document.querySelector('#spacecrew #crew-dragon button');
-        toggle0.addEventListener('click', function(ev) {
-          console.log("evvvv", ev);
-          // toggle(ev);
-          selectName("dragon");
-        });
-        const toggle1 = document.querySelector('#spacecrew #crew-bill button');
-        toggle1.addEventListener('click', function(ev) {
-          console.log("evvvv", ev);
-          // toggle(ev);
-          selectName("bill");
-        });
-      }
-
-      build();
-
 
 
     </script>
