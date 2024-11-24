@@ -54,7 +54,7 @@
       //
       //
       //
-      //       buildtoggles();
+            buildtoggles();
 
 
     </script>
@@ -161,45 +161,47 @@
 
     <script type="text/javascript">
 
-    document.addEventListener("DOMContentLoaded", () => {
-  const videos = document.querySelectorAll("video[data-src]");
-//   const videos2 = document.querySelectorAll("video");
-// console.log("videos2", videos2);
-//   videos2.forEach((video) => {
-//     video.setAttribute("hidden", ""); // Hide the video
+    // lazyloader, but makes a bland effect of popping
 //
-//   })
-
-
-
-console.log("videos", videos);
-
-  const loadVideo = (video) => {
-    const src = video.getAttribute("data-src");
-    if (!src) return;
-
-
-
-    video.src = src; // Set the video source
-    video.removeAttribute("data-src"); // Remove the data-src attribute
-    // video.load(); // Reload the video to apply the new source
-
-    video.play();
-    console.log("play");
-
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        loadVideo(entry.target); // Load video when in view
-        observer.unobserve(entry.target); // Stop observing after loading
-      }
-    });
-  });
-
-  videos.forEach((video) => observer.observe(video)); // Start observing each video
-});
+//     document.addEventListener("DOMContentLoaded", () => {
+//   const videos = document.querySelectorAll("video[data-src]");
+// //   const videos2 = document.querySelectorAll("video");
+// // console.log("videos2", videos2);
+// //   videos2.forEach((video) => {
+// //     video.setAttribute("hidden", ""); // Hide the video
+// //
+// //   })
+//
+//
+//
+// console.log("videos", videos);
+//
+//   const loadVideo = (video) => {
+//     const src = video.getAttribute("data-src");
+//     if (!src) return;
+//
+//
+//
+//     video.src = src; // Set the video source
+//     video.removeAttribute("data-src"); // Remove the data-src attribute
+//     // video.load(); // Reload the video to apply the new source
+//
+//     video.play();
+//     console.log("play");
+//
+//   };
+//
+//   const observer = new IntersectionObserver((entries) => {
+//     entries.forEach((entry) => {
+//       if (entry.isIntersecting) {
+//         loadVideo(entry.target); // Load video when in view
+//         observer.unobserve(entry.target); // Stop observing after loading
+//       }
+//     });
+//   });
+//
+//   videos.forEach((video) => observer.observe(video)); // Start observing each video
+// });
 
 
     </script>

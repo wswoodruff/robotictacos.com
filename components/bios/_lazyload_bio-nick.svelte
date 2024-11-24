@@ -13,27 +13,12 @@
       <li>Featured at <em>Tribeca Film Festival</em></li>
     </ul>
     <!-- just visual noise -->
+    <video playsinline data-src="/videos/vrtalk.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+    <video playsinline data-src="/videos/vr4.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+    <video playsinline data-src="/videos/vrheart.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+    <video playsinline data-src="/videos/vrhand234.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+    <video playsinline data-src="/videos/spacepupets.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
 
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/vrtalk.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/vr4.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/vrheart.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/vrhand234.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/spacepupets.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
     <ul class="tags-noise">
       <li>Oculus Rift</li>
       <li>Unity 3D</li>
@@ -45,15 +30,10 @@
     </ul>
   </section>
   <aside>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="https://cdn.glitch.global/a4a18359-54bf-415e-86f0-691a7faa51bf/vr1.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
 
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/ball1vr2.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
+    <video playsinline data-src="https://cdn.glitch.global/a4a18359-54bf-415e-86f0-691a7faa51bf/vr1.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+    <video playsinline data-src="/videos/ball1vr2.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+
 
 
   </aside>
@@ -83,10 +63,9 @@
     </ul>
   </section>
   <aside>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline id="creative-iphone" muted="true" autoplay="true" loop class="featured-video">
-      <source src="https://cdn.glitch.global/a4a18359-54bf-415e-86f0-691a7faa51bf/iphone1.mp4?v=1705020740668" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
+
+    <video id="creative-iphone" playsinline data-src="https://cdn.glitch.global/a4a18359-54bf-415e-86f0-691a7faa51bf/iphone1.mp4?v=1705020740668" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+
 
   </aside>
 </article>
@@ -116,10 +95,8 @@
     </ul>
   </section>
   <aside>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/trixel.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
+    <video playsinline data-src="/videos/trixel.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+
   </aside>
 </article>
 
@@ -174,17 +151,14 @@
       <li>Blender 3D</li>
       <li>Vive</li>
     </ul>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="_featured-video">
-      <source src="/videos/vrkelp.mp4" type="video/mp4" />
-      Your browser does not support the video tag guesses.
-    </video>
+
+    <video playsinline data-src="/videos/vrkelp.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
 
   </section>
   <aside>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/vrcity.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
+
+    <video playsinline data-src="/videos/vrcity.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+
     <!-- <img src="/images/mybodymodel.jpg" alt=""> -->
   </aside>
 
@@ -215,14 +189,11 @@
     </ul>
   </section>
   <aside>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/wexar.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/wexar_b.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
+
+    <video playsinline data-src="/videos/wexar.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+    <video playsinline data-src="/videos/wexar_b.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+
+
     <!-- <img src="/images/mybodymodel.jpg" alt=""> -->
   </aside>
 
@@ -250,10 +221,9 @@
     </ul>
   </section>
   <aside>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/straighttalk.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
+
+    <video playsinline data-src="/videos/straighttalk.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+
   </aside>
 
 </article>
@@ -285,23 +255,15 @@
       <li>After Effects</li>
     </ul>
 
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/gistify_production.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/32north_bumpe.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
+        <video playsinline data-src="/videos/gistify_production.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+        <video playsinline data-src="/videos/32north_bumpe.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
 
   </section>
 
   <aside>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/cocoon.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
+
+    <video playsinline data-src="/videos/cocoon.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+
   </aside>
 
 </article>
@@ -339,10 +301,8 @@
     </ul>
   </section>
   <aside>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline id="creative-iphone" muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/arshoe1.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
+
+    <video playsinline data-src="/videos/arshoe1.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
 
   </aside>
 </article>
@@ -455,17 +415,15 @@
       <li>Rails</li>
       <li>Photoshop</li>
     </ul>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/news1.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
+
+    <video playsinline data-src="/videos/news1.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+
   </section>
 
   <aside>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/ldub2.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
+
+    <video playsinline data-src="/videos/ldub2.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" class="featured-video" loop></video>
+
   </aside>
 
 </article>
@@ -475,57 +433,22 @@
 
 
 <article>
-  <section>
+  <section class="videostack">
     <h3>Others</h3>
     <!-- <p>Straight Talk Google VR. Google Cardboard android phone VR powered game for tradeshow.</p> -->
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/atractor1.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/ball1.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/arbrid1b.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/candystar.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/kindaai.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/infinigame1.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/gamegrid1.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/dino.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/shaders1.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/vrfilterness.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/vrmultihands.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
-    <video preload="none" poster="./videos/tacos_in2.gif" playsinline muted="true" autoplay="true" loop class="featured-video">
-      <source src="/videos/circles_a.mp4" type="video/mp4" />
-        Your browser does not support the video tag guesses.
-    </video>
+    <video playsinline data-src="/videos/atractor1.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" loop></video>
+    <video playsinline data-src="/videos/ball1.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" loop></video>
+    <video playsinline data-src="/videos/arbrid1b.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" loop></video>
+    <video playsinline data-src="/videos/candystar.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" loop></video>
+    <video playsinline data-src="/videos/kindaai.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" loop></video>
+    <video playsinline data-src="/videos/infinigame1.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" loop></video>
+    <video playsinline data-src="/videos/gamegrid1.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" loop></video>
+    <video playsinline data-src="/videos/dino.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" loop></video>
+    <video playsinline data-src="/videos/shaders1.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" loop></video>
+    <video playsinline data-src="/videos/vrfilterness.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" loop></video>
+    <video playsinline data-src="/videos/vrmultihands.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" loop></video>
+    <video playsinline data-src="/videos/circles_a.mp4" muted="true" preload="none" poster="./videos/tacos_in2.gif" loop></video>
 
+<!-- <p>?¿</p> -->
   </section>
 </article>
