@@ -79,7 +79,7 @@
       height: 100px;
     }
 
-    button, .buuuton {
+    button {
       background-color: #007bff;
       color: white;
       border: none;
@@ -88,7 +88,7 @@
       transition: background-color 0.3s ease;
     }
 
-    button:hover, .buuuton:hover {
+    button:hover {
       background-color: #0056b3;
     }
 
@@ -134,40 +134,67 @@
 </style>
 
 <script>
+  // document.getElementById("contact-form").addEventListener("submit", async (event) => {
+  //   event.preventDefault();
+
+  let name = "";
+  let email = "";
+  let message = "";
   let showError = false; // Controls visibility
   let errorMessage = ""; // Stores the error message
   let showSuccess = false; // Stores the error message
   let successMessage = ""; // Stores the error message
 
-  let status = "";
-  const handleSubmit = async data => {
-    status = 'Submitting...'
-    const formData = new FormData(data.currentTarget)
-    const object = Object.fromEntries(formData);
-    const json = JSON.stringify(object);
+  async function send(ev) {
 
-    const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
+      ev.preventDefault();
+
+      // const name = document.getElementById("name").value;
+      // const email = document.getElementById("email").value;
+      // const message = document.getElementById("message").value;
+
+      console.log(name, email, message);
+
+      try {
+        // const response = await fetch("http://localhost:3000/contact", {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
             "Content-Type": "application/json",
-            Accept: "application/json",
-        },
-        body: json
-    });
-    const result = await response.json();
-    if (result.success) {
-        console.log(result);
-        showSuccess = true;
-        successMessage = " SENT!!";
-        status = result.message || "Success"
-        status = '';
-    }
-    else{
-      showError = true;
-      errorMessage = "OH NO!!! Error some robot failed!!";
-    }
-  }
+            "access_key": "dec5f887-d3a3-4922-988e-de93891b0c80",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({ name, email, message }),
+        });
 
+        // const formData = new FormData(ev.target);
+        //
+        // formData.append("access_key", "dec5f887-d3a3-4922-988e-de93891b0c80");
+        //
+        // const response = await fetch("https://api.web3forms.com/submit", {
+        //   method: "POST",
+        //   body: formData
+        // });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          showSuccess = true;
+          successMessage = " SENT!!";
+          document.getElementById("response-message").textContent = data.message;
+        } else {
+          showError = true;
+          errorMessage = "OH NO!!! Error some robot failed!!";
+          // document.getElementById("response-message").textContent = data.error;
+        }
+      } catch (error) {
+        showError = true;
+        errorMessage = "OH NO!!! Error some robot failed!!";
+        console.error("Error submitting the form:", error);
+        // document.getElementById("response-message").textContent = "An error occurred.";
+      }
+
+  }
 
 </script>
 
@@ -176,39 +203,35 @@
 
 
   <h2>Contact Robots</h2>
-
-  <form on:submit|preventDefault={handleSubmit} id="contact-form">
-    <div>{status}</div>
-
+  <form id="contact-form">
+    <!-- <p id="success-message" class="response">{successMessage}</p> -->
     {#if showError}
       <p id="error-message" class="response">{errorMessage}</p>
       {:else if showSuccess}
       <p id="success-message" class="response">{successMessage}</p>
     {/if}
-    <input type="hidden" name="access_key" value="dec5f887-d3a3-4922-988e-de93891b0c80">
-
     <div class="group">
       <label for="name">Name</label>
-      <input type="text" name="name" required />
+      <input type="text" id="name" name="name" bind:value={name} required>
     </div>
-
     <div class="group">
       <label for="email">Email</label>
-      <input type="email" name="email" required />
+      <input type="email" id="email" name="email" bind:value={email} required>
     </div>
-
     <label for="message">Message</label>
-    <textarea name="message" required rows="3"></textarea>
-    <input class="buuuton" type="submit" />
+    <textarea id="message" name="message" bind:value={message} required></textarea>
+    <button type="submit" on:click={send}>Submit</button>
 
+    <!-- <p id="response-message">sglkndfgjn</p> -->
+    <!-- <p id="response-message"></p> -->
     {#if showError}
       <p id="error-message" class="response">{errorMessage}</p>
       {:else if showSuccess}
       <p id="success-message" class="response">{successMessage}</p>
     {/if}
+    <!-- <p id="success-message" class="response">"slkdfnsf"</p> -->
 
   </form>
-
 
 
 </div>

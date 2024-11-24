@@ -47,5 +47,6 @@
   <li><a href="index222fun.html">index222fun</a></li>
   <li><a href="indexrock.html">indexrock</a></li>
   <li><a href="indextacos.html">indextacos</a></li>
-  <li><a href="index_min.html">index_min</a></li>
+  <!-- <li><a href="index_min.html">index_min</a></li> -->
+  <li><a href="index_kinda.html">index_kinda</a></li>
 </ul>
