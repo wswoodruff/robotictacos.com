@@ -118,9 +118,11 @@ export function bindModalDatas(){
   // debugger
   // videos[4].querySelector('source').src
   for (let i = 0; i < videos.length-1; i++) {
-    // const vvv = videos[i].querySelector('source');
+    const vvv = videos[i].querySelector('source');
+    videos[i].src = vvv.src;
     // console.log(vvv.src);
     // if (vvv.src) {
+
       videos[i].addEventListener('click', function(ev) {
         const src = this.src;
         // console.log("src", vvv.src);
