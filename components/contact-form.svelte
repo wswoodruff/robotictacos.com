@@ -161,7 +161,8 @@
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "access_key": "dec5f887-d3a3-4922-988e-de93891b0c80"
+            "access_key": "dec5f887-d3a3-4922-988e-de93891b0c80",
+            Accept: "application/json"
           },
           body: JSON.stringify({ name, email, message }),
         });

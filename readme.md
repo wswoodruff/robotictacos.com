@@ -10,6 +10,8 @@ npx vite
 
 delete dist
 npm run build
+MAYBE
+git rm dist -r
 git add .
 git commit -m "skdjnf"
 git commit -am "^#%^#"
