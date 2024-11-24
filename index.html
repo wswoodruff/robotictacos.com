@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- <link href="https://fonts.googleapis.com/css2?family=Gurajada&display=swap" rel="stylesheet"> -->
 
-    <link rel="stylesheet" href="/webfonts/grandslam/grand-slam-script-regular.css" type="text/css" charset="utf-8" />
 
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
@@ -17,49 +16,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- <link rel="stylesheet" href="./css/alphav1ab1.css"> -->
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/min.scss">
 
     <!-- defaulting to a plugin for now for some quick effects -->
     <script src="https://unpkg.com/scrollreveal"></script>
 
-    <link rel="stylesheet" href="./js/video-modal/video-modal.scss">
     <!-- <script src="./js/video-modal/video-modal.js"></script> -->
 
 
-    <script type="module">
-      import { mount } from 'svelte';
-      import Stackvids from './components/videos-stack.svelte';
-      import Nav from './components/nav-all.svelte';
-      import Bionick from './components/bios/bio-nick.svelte';
-      import Biobill from './components/bios/bio-bill.svelte';
-      import ContactForm from './components/contact-form.svelte';
-      // using svelte 5
-      // const app = mount(App, { target: document.getElementById("aaa") });
-      // const app = mount(Stackvids, { target: document.getElementById("s-stackvids") });
-      // const nav = mount(Nav, { target: document.getElementById("s-nav") });
-      const bionick = mount(Bionick, { target: document.getElementById("content-nick") });
-      const biobill = mount(Biobill, { target: document.getElementById("content-bill") });
-
-      const contactform = mount(ContactForm, { target: document.getElementById("contact-form") });
-
-      import { bindModalDatas, createModals } from './js/video-modal/video-modal.js';
-      import { buildtoggles } from './js/space-crew-toggles.js';
-      // window.closeVideo = closeVideo;
-      // window.closeImage = closeImage;
-
-      createModals();
-      //
-      bindModalDatas();
-      //
-      //
-      //
-            buildtoggles();
 
 
-    </script>
-
-
+    <script type="module" crossorigin src="/assets/index-CY5qGVYu.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+    <link rel="modulepreload" crossorigin href="/assets/legacy-B2A5nJXN.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-OFuC_7Bd.css">
+    <link rel="stylesheet" crossorigin href="/assets/grand-slam-script-regular-aF3rhyMy.css">
+    <link rel="stylesheet" crossorigin href="/assets/nav-all-lsXLAMt2.css">
   </head>
 
   <body>
