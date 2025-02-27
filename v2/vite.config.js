@@ -11,7 +11,8 @@ export default defineConfig({
   plugins: [
     viteStaticCopy({
       targets: [
-        { src: './CNAME', dest: '.' }
+        { src: './CNAME', dest: '.' },
+        { src: './videos', dest: '.' }
       ]
     })
   ],

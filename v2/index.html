@@ -5,8 +5,35 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
+
+    <script>
+      // Import all video files from a directory
+      const videos = import.meta.glob('/videos/*.mp4', { eager: true });
+
+      // Convert object keys to an array of URLs
+      const videoFiles = Object.values(videos).map(v => v.default);
+    </script>
+    
+    <style>
+      .video-container {
+        margin: 10px;
+      }
+      video {
+        width: 100%;
+        max-width: 500px;
+      }
+    </style>
+
   </head>
   <body>
+<div>
+  {#each videoFiles as videoSrc}
+    <div class="video-container">
+      <video src={videoSrc} controls></video>
+    </div>
+  {/each}
+</div>
+
     <div id="app"></div>
     <h1>RoboticTacos & narf</h1>
     <!-- <script type="module" src="/src/main.js"></script> -->
