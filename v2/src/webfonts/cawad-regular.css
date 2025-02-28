@@ -1,0 +1,27 @@
+/*
+Font: 		Cawad
+Style: 		Regular
+URL: 		https://youworkforthem.com/font/T22835/cawad
+Foundry: 	God Control
+Foundry: 	https://youworkforthem.com/designer/1840/god-control
+Copyright:	
+Version: 	17
+Created:	March 04, 2024
+License: 	https://www.youworkforthem.com/font-license 
+License: 	The WebFont(s) listed in this document must follow the YouWorkForThem
+			WebFont license rules. All other parties are strictly restricted 
+			from using the WebFonts(s) listed without a purchased license. 
+			All details above must always remain unaltered and visible in your CSS.
+*/
+
+@font-face {
+	font-family: 'CawadRegular';
+	src: url('cawad-regular.eot');
+	src: url('cawad-regular.eot?#iefix') format('embedded-opentype'),
+             url('cawad-regular.woff2') format('woff2'),
+	     url('cawad-regular.woff') format('woff'),
+	     url('cawad-regular.ttf') format('truetype'),
+	     url('cawad-regular.svg#youworkforthem') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}

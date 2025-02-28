@@ -1,26 +1,86 @@
 import { defineConfig } from 'vite'
+import { svelte } from '@sveltejs/vite-plugin-svelte';
 
 import { viteStaticCopy } from 'vite-plugin-static-copy'
+import path from 'path';
+import fs from 'fs';
 
+import { readdirSync } from 'fs';
+
+
+import dotenv from 'dotenv';
+
+dotenv.config(); // Load .env variables
+
+
+const gamesDir = path.resolve(__dirname, 'games/');
+
+
+// const gameHtmlFiles = fs.readdirSync(gamesDir)
+//   .filter(file => file.endsWith('.html'))
+//   .reduce((acc, file) => {
+//     const name = file === 'index.html' ? 'games' : `games/${path.parse(file).name}`;
+//     acc[name] = path.join(gamesDir, file);
+//     return acc;
+//   }, {});
+const gameHtmlFiles = fs.readdirSync(gamesDir)
+  .filter(file => file.endsWith('.html'))
+  .reduce((acc, file) => {
+    acc[`games${file === 'index.html' ? '' : path.parse(file).name}`] = path.join(gamesDir, file);
+    return acc;
+  }, {});
 
 // https://vitejs.dev/config/
 export default defineConfig({
   
-  base: '/robotictacos.com/',
+  // base breaks linking now for new gh-ps???
+  // base: '/robotictacos.com/',
+  // base: '/robotictacos.com',
+  // base: '/robotictacos.com',
+
+  define: {
+    SUPERNEATLIB_PATH: JSON.stringify(process.env.VITE_SUPERNEATLIB_PATH)
+  },
 
   plugins: [
+    svelte(),
     viteStaticCopy({
       targets: [
         { src: './CNAME', dest: '.' },
-        { src: './videos', dest: '.' }
+        // { src: './videos', dest: '.' }
+        { src: './games', dest: '.' } // Copies entire games folder, including assets
+
       ]
     })
   ],
-  
+
+  resolve: {
+    alias: {
+      three: `/node_modules/three/build/three.module.js`,
+      // three: `./node_modules/three/build/three.module.js`,
+      'superneatlib': '/node_modules/superneatlib/build/superneatlib.js',
+      // 'superneatlib': 'http://localhost:5000/superneatlib.js',
+      // 'three': 'three',
+      'three/examples/jsm/math/' : '/node_modules/three/examples/jsm/math/',
+      '@games': '/games'
+    },
+  },
+
   build:{
 
-    outDir: './build',  // Change to 'build' if needed
+    outDir: './build',  // gh-pages needs to to be called build now?!
     emptyOutDir: true, // also necessary
+
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        ...gameHtmlFiles
+      },
+    },
+
   }
 
 })
+
+
+

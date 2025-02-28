@@ -2,40 +2,40 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>RoboticTacos</title>
 
-    <script>
-      // Import all video files from a directory
-      const videos = import.meta.glob('/videos/*.mp4', { eager: true });
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
-      // Convert object keys to an array of URLs
-      const videoFiles = Object.values(videos).map(v => v.default);
-    </script>
-    
-    <style>
-      .video-container {
-        margin: 10px;
-      }
-      video {
-        width: 100%;
-        max-width: 500px;
-      }
-    </style>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/src/style.css">
+    <link rel="stylesheet" type="text/css" href="/src/webfonts/cawad-regular.css">
 
   </head>
   <body>
-<div>
-  {#each videoFiles as videoSrc}
-    <div class="video-container">
-      <video src={videoSrc} controls></video>
-    </div>
-  {/each}
-</div>
 
+    <h1>Robotic Tacos<span>mini</span></h1>
+    <!-- <h1>SpiceyRobots</h1> -->
     <div id="app"></div>
-    <h1>RoboticTacos & narf</h1>
     <!-- <script type="module" src="/src/main.js"></script> -->
+
+    <script type="module">
+      import { mount } from 'svelte';
+
+      import Videos from "./src/components/Videos.svelte";
+      import Junk from "./src/components/Junk.svelte";
+
+      // new Videos({
+      //   target: document.getElementById("app"),
+      //   // props: { name: "Svelte" }
+      // });
+      // const junk = mount(Junk, { target: document.getElementById("app") });
+      const videos = mount(Videos, { target: document.getElementById("app") });
+
+    </script>
+
   </body>
 </html>
