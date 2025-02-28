@@ -1,1 +1,83 @@
-index.html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboticTacos</title>
+
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> -->
+
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet"> -->
+
+    <link rel="stylesheet" type="text/css" href="/src/three.css">
+    <link rel="stylesheet" type="text/css" href="/src/style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/src/webfonts/cawad-regular.css"> -->
+    <link rel="stylesheet" type="text/css" href="/src/webfonts/cawad-regular.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet"> -->
+
+
+
+
+  <!-- SOMETHING is broken with aliases so this is the only thing working -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "/node_modules/three/build/three.module.js",
+      "superneatlib": "/node_modules/superneatlib/build/superneatlib.js",
+      "lil-gui": "/node_modules/lil-gui/dist/lil-gui.esm.js"
+    }
+  }
+  </script>
+
+
+  <style type="text/css">
+    
+    #htmlcontent{
+      position: absolute;
+      z-index: 10;
+      padding-left: 1em;
+
+    }
+    #htmlcontent h1{
+      padding-left: 0;
+      font-size: 3rem;
+    }
+
+  </style>
+
+
+  </head>
+  <body>
+
+    <div id="htmlcontent">
+      <h1>Robotic Tacos<span>mini</span></h1>
+      <h4>controls: wasd</h4>
+    </div>
+
+    <!-- <h1>Robotic Tacos<span>mini</span></h1> -->
+    <!-- <h1>SpiceyRobots</h1> -->
+    <!-- <div id="app"></div> -->
+    <!-- <script type="module" src="/src/main.js"></script> -->
+
+    <script type="module">
+
+
+      import {init} from './mainlike.js';
+      function initB() {
+        init();
+      }
+
+      initB();
+
+      // console.log("sldknldkfnglk")
+
+    </script>
+
+  </body>
+</html>
