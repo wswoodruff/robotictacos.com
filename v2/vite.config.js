@@ -8,27 +8,30 @@ import fs from 'fs';
 import { readdirSync } from 'fs';
 
 
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
-dotenv.config(); // Load .env variables
+// dotenv.config(); // Load .env variables
 
 
-const gamesDir = path.resolve(__dirname, 'games/');
 
+// this removes the need to run viteStaticCopy
+// but its also super important cause the aliases dont work without it
+// however its stuck to only one folder for now
+const gamesDir = path.resolve(__dirname, 'games/boxgame1');
+const gameHtmlFiles = fs.readdirSync(gamesDir)
+  .filter(file => file.endsWith('.html'))
+  .reduce((acc, file) => {
+    const name = file === 'index.html' ? 'games' : `games/${path.parse(file).name}`;
+    acc[name] = path.join(gamesDir, file);
+    return acc;
+  }, {});
 
 // const gameHtmlFiles = fs.readdirSync(gamesDir)
 //   .filter(file => file.endsWith('.html'))
 //   .reduce((acc, file) => {
-//     const name = file === 'index.html' ? 'games' : `games/${path.parse(file).name}`;
-//     acc[name] = path.join(gamesDir, file);
+//     acc[`games${file === 'index.html' ? '' : path.parse(file).name}`] = path.join(gamesDir, file);
 //     return acc;
 //   }, {});
-const gameHtmlFiles = fs.readdirSync(gamesDir)
-  .filter(file => file.endsWith('.html'))
-  .reduce((acc, file) => {
-    acc[`games${file === 'index.html' ? '' : path.parse(file).name}`] = path.join(gamesDir, file);
-    return acc;
-  }, {});
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -36,7 +39,8 @@ export default defineConfig({
   // base breaks linking now for new gh-ps???
   // base: '/robotictacos.com/',
   // base: '/robotictacos.com',
-  // base: '/robotictacos.com',
+  // base: '/fish',
+  // base: './',
 
   define: {
     SUPERNEATLIB_PATH: JSON.stringify(process.env.VITE_SUPERNEATLIB_PATH)
@@ -48,7 +52,8 @@ export default defineConfig({
       targets: [
         { src: './CNAME', dest: '.' },
         // { src: './videos', dest: '.' }
-        { src: './games', dest: '.' } // Copies entire games folder, including assets
+        // { src: './games', dest: '.' } // Copies entire games folder, including assets
+        // { src: './games', dest: '.' } // Copies entire games folder, including assets
 
       ]
     })
@@ -56,13 +61,15 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      three: `/node_modules/three/build/three.module.js`,
+      'three': '/node_modules/three/build/three.module.js',
+            // three: path.resolve('node_modules/three/build/three.module.js'),
+
       // three: `./node_modules/three/build/three.module.js`,
       'superneatlib': '/node_modules/superneatlib/build/superneatlib.js',
       // 'superneatlib': 'http://localhost:5000/superneatlib.js',
       // 'three': 'three',
       'three/examples/jsm/math/' : '/node_modules/three/examples/jsm/math/',
-      '@games': '/games'
+      '@games': '/src/games'
     },
   },
 
