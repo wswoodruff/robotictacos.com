@@ -2,7 +2,11 @@
 import { PointLight, BufferAttribute,
   PointsMaterial, Points, BufferGeometry,
   ShaderMaterial,
-  Vector2, Clock, BackSide } from 'three';
+  Vector2, Clock, BackSide, Vector3 } from 'three';
+
+
+
+import { MeshBasicMaterial, FrontSide, WireframeGeometry, EdgesGeometry, LineBasicMaterial,  LineSegments } from 'three';
 
 
 import { setupPlaneHelper, setupGridHelper,
@@ -17,12 +21,22 @@ import { APP as _o } from "superneatlib";
 
 const clock = new Clock();
 
+
+import { ModelLoaderObject3D } from 'superneatlib';
+
+const modelurl = new URL('@models_shared/bot1.glb', import.meta.url).href;
+const modelurl2 = new URL('./bot2.glb', import.meta.url).href;
+
+
+
 export async function init() {
 
+  const store = _o;
 
   init3d(_o);
   // setupOrbitController(_o);
   // setupFirstPersonControls(_o, {movementSpeed:0.4, lookSpeed:0.2, dragToLook: true});
+  
   setupFlyControls(_o, {movementSpeed:0.4, rollSpeed:0.4, dragToLook: true, autoForward: false});
 
   setupGameLoopWithFPSClamp(_o);
@@ -30,7 +44,7 @@ export async function init() {
   addResizeWindow(_o);
 
   setupPlaneHelper(_o);
-  setupGridHelper({store:_o, type:"y"});
+  // setupGridHelper({store:_o, type:"y"});
 
   const scene = _o.scene;
   const camera = _o.camera;
@@ -47,13 +61,216 @@ export async function init() {
   camera.position.y = 0.5;
 
   const ball = Primitives.ball({store:_o, scale: 0.1, color: 0x00ffff});
-  ball.position.y += 0.1;
-  ball.scale.setScalar(1.4);
+  ball.position.set(0,0,0);
+  ball.scale.setScalar(0.4);
   SuperObject3D.decoSuper3D(ball);
   _o.addObject3D(ball);
+  ball.material.color.setHex(0x111111)
+  // ball.scale.setScalar(0.2);
+  // ball.visible = false;
+  ball.renderOrder = 0;
+  ball.material.opacity = 0.9;
+  ball.material.transparent = true;
+  // ball.material.depthTest = false;
+
+
+  const ball2 = Primitives.ball({store:_o, scale: 0.1, color: 0x00ffff});
+  ball2.position.set(0,0,0);
+  ball2.scale.setScalar(1);
+  SuperObject3D.decoSuper3D(ball2);
+  _o.addObject3D(ball2);
+  ball2.renderOrder = 1;
+  ball2.material.depthTest = false;
+  ball.add(ball2);
+  // ball2.material.wireframe = true;
+
+  ball.scale.setScalar(2)
+  ball.position.set(0,-2,0)
+
+
+  ball2.material = new MeshBasicMaterial({
+      color: 0xffffff,
+      wireframe: true,
+      side: FrontSide // Enables back-face culling
+  });
+
+  // ball.material.wireframe = true;
+  // ball.material.side = FrontSide;
 
   camera.position.set(0,0.05,0)
+  camera.position.set(0,0.2,0.9)
 
+  store.currentControls.enabled = false;
+
+
+
+  let isShiftDown = false;
+  document.addEventListener('keydown', (event) => {
+      // if (isScrolling) return;
+      // console.log(event.key, event.shiftKey)
+
+      if (event.shiftKey) {
+        isShiftDown = true;
+        store.currentControls.enabled = true;
+      }
+  });
+
+  document.addEventListener('keyup', (event) => {
+      // if (isScrolling) return;
+      // console.log(event.key, event.shiftKey)
+
+      if (isShiftDown && !event.shiftKey) {
+        isShiftDown = false;
+        store.currentControls.enabled = false;
+      }
+  });
+
+
+
+
+
+
+
+  ball.controls = {
+    dir : new Vector3(),
+    isMoving : false,
+    speed : 0.06
+  };
+  ball.update = function() {
+    if(ball.controls.isMoving){
+      ball.rotation.x += ball.controls.dir.x * ball.controls.speed;
+      ball.rotation.y += ball.controls.dir.y * ball.controls.speed;
+    }
+  }
+
+
+  document.addEventListener('keydown', (event) => {
+      // if (isScrolling) return;
+      // console.log(event.key, event.shiftKey)
+
+      if(event.key === "ArrowUp"){
+        // ball.rotation.x += 0.1;
+        ball.controls.isMoving = true;
+        ball.controls.dir.x = 1;
+      }
+      if(event.key === "ArrowDown"){
+        // ball.rotation.x += 0.1;
+        ball.controls.isMoving = true;
+        ball.controls.dir.x = -1;
+      }
+      if(event.key === "ArrowLeft"){
+        // ball.rotation.x += 0.1;
+        ball.controls.isMoving = true;
+        ball.controls.dir.y = 1;
+      }
+      if(event.key === "ArrowRight"){
+        // ball.rotation.x += 0.1;
+        ball.controls.isMoving = true;
+        ball.controls.dir.y = -1;
+      }
+
+  });
+  document.addEventListener('keyup', (event) => {
+      // if (isScrolling) return;
+      // console.log(event.key, event.shiftKey)
+
+
+      let arrowKeyCount = 4;
+      if(event.key === "ArrowUp"){
+        arrowKeyCount--;
+        ball.controls.dir.x = 0;
+      }
+      if(event.key === "ArrowDown"){
+        // ball.rotation.x += 0.1;
+        arrowKeyCount--;
+        ball.controls.dir.x = 0;
+      }
+      if(event.key === "ArrowLeft"){
+        // ball.rotation.x += 0.1;
+        arrowKeyCount--;
+        ball.controls.dir.y = 0;
+      }
+      if(event.key === "ArrowRight"){
+        // ball.rotation.x += 0.1;
+        arrowKeyCount--;
+        ball.controls.dir.y = 0;
+      }
+      if(arrowKeyCount <= 0){
+        ball.controls.isMoving = true;
+      }
+
+      
+  });
+
+
+
+
+
+
+    const model = new ModelLoaderObject3D(modelurl);
+    // const model = new TenniShoe(mmodelurl);
+    await model.init(_o);
+    model.scaleTo(.5)
+    model.playAnimations()
+
+    model.checkMeshes();
+
+    // debugger
+
+    // const botbase = model.getObjectByName("botbase");
+    // const botwire = model.getObjectByName("botwire");
+    // if(botbase && botwire){
+    //   botwire.material = botwire.material.clone();
+    //   botwire.material.wireframe = true;
+    //   botbase.visible = false;
+    // }
+
+//     for (let i = 0; i < model.meshes.length; i++) {
+//       const item = model.meshes[i];
+//       // console.log("item", item.name, item.material.transparent, item.material.opacity);
+//       // item.material.transparent = true;
+//       // item.material.wireframe = true;
+//       // item.material.color.setHex(0x000000)
+//       // item.material.opacity = val;
+// //       const mesh = item;
+// // const geo = new EdgesGeometry( mesh.geometry ); // or WireframeGeometry
+// // const mat = new LineBasicMaterial( { color: 0xffffff } );
+// // const wireframe = new LineSegments( geo, mat );
+// // mesh.add( wireframe );
+
+//         if (item.isSkinnedMesh) {
+//           const geo = new WireframeGeometry(item.geometry.clone()); // Clone to avoid skinning issues
+//           const mat = new LineBasicMaterial({ color: 0xffffff });
+//           const wireframe = new LineSegments(geo, mat);
+          
+//           geo.attributes.position.needsUpdate = true;
+//           item.add(wireframe);
+
+//           // Update wireframe to follow animation
+//           // function updateWireframe() {
+//           //   geo.copy(item.geometry);
+//           //   // requestAnimationFrame(updateWireframe);
+//           // }
+
+//           // updateWireframe(); // Start updating wireframe
+
+//         }
+
+//     }
+
+    // model.mixer.stopAllAction();
+
+// debugger
+    // AvatarType(model);
+
+    // just tweak the position a bit
+    // model.children[0].position.y += 1;
+    // store.scene.add(model);
+    // store.sceneGrapth.add(model);
+    _o.addObject3D(model);
+    if(_o.selectorMesh){
+      _o.selectorMesh.visible = false;
+    }
 
 return
 

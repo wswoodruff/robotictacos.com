@@ -16,22 +16,41 @@ import { readdirSync } from 'fs';
 
 // this removes the need to run viteStaticCopy
 // but its also super important cause the aliases dont work without it
-// however its stuck to only one folder for now
-const gamesDir = path.resolve(__dirname, 'games/boxgame1');
-const gameHtmlFiles = fs.readdirSync(gamesDir)
-  .filter(file => file.endsWith('.html'))
-  .reduce((acc, file) => {
-    const name = file === 'index.html' ? 'games' : `games/${path.parse(file).name}`;
-    acc[name] = path.join(gamesDir, file);
-    return acc;
-  }, {});
-
+// // however its stuck to only one folder for now
+// const gamesDir = path.resolve(__dirname, 'games/boxgame1');
 // const gameHtmlFiles = fs.readdirSync(gamesDir)
 //   .filter(file => file.endsWith('.html'))
 //   .reduce((acc, file) => {
-//     acc[`games${file === 'index.html' ? '' : path.parse(file).name}`] = path.join(gamesDir, file);
+//     const name = file === 'index.html' ? 'games' : `games/${path.parse(file).name}`;
+//     acc[name] = path.join(gamesDir, file);
 //     return acc;
 //   }, {});
+
+const gamesDir = path.resolve(__dirname, 'games');
+
+const gameDirs = fs.readdirSync(gamesDir)
+  .filter(file => fs.statSync(path.join(gamesDir, file)).isDirectory());
+
+const gameHtmlFiles = gameDirs.reduce((acc, dir) => {
+  const dirPath = path.join(gamesDir, dir);
+  const htmlFiles = fs.readdirSync(dirPath)
+    .filter(file => file.endsWith('.html'))
+    .reduce((dirAcc, file) => {
+      const name = file === 'index.html' ? `${dir}/games` : `${dir}/games/${path.parse(file).name}`;
+      dirAcc[name] = path.join(dirPath, file);
+      return dirAcc;
+    }, {});
+
+  return { ...acc, ...htmlFiles };
+}, {});
+
+
+//// const gameHtmlFiles = fs.readdirSync(gamesDir)
+////   .filter(file => file.endsWith('.html'))
+////   .reduce((acc, file) => {
+////     acc[`games${file === 'index.html' ? '' : path.parse(file).name}`] = path.join(gamesDir, file);
+////     return acc;
+////   }, {});
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -69,7 +88,9 @@ export default defineConfig({
       // 'superneatlib': 'http://localhost:5000/superneatlib.js',
       // 'three': 'three',
       'three/examples/jsm/math/' : '/node_modules/three/examples/jsm/math/',
-      '@games': '/src/games'
+      '@games': '/games',
+      '@promotetosuper': '/games/promotetosuper',
+      '@models_shared': '/games/models_shared'
     },
   },
 
