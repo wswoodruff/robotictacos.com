@@ -87,7 +87,7 @@ export default defineConfig({
       'superneatlib': '/node_modules/superneatlib/build/superneatlib.js',
       // 'superneatlib': 'http://localhost:5000/superneatlib.js',
       // 'three': 'three',
-      'three/examples/jsm/math/' : '/node_modules/three/examples/jsm/math/',
+      '/three/examples/jsm/math/' : '/node_modules/three/examples/jsm/math/',
       '@games': '/games',
       '@promotetosuper': '/games/promotetosuper',
       '@models_shared': '/games/models_shared'
