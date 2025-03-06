@@ -11,7 +11,10 @@
     <!-- <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet"> -->
 
+    <link rel="stylesheet" type="text/css" href="/src/three.css">
+    <link rel="stylesheet" type="text/css" href="/src/style.css">
     <!-- <link rel="stylesheet" type="text/css" href="/src/webfonts/cawad-regular.css"> -->
+    <link rel="stylesheet" type="text/css" href="/src/webfonts/cawad-regular.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
@@ -32,27 +35,70 @@
         font-size: 3rem;
       }
 
+
+  #joystickcontroller {
+    position: absolute;
+    
+    right: 1em;
+    bottom: 1em;
+    margin-bottom: env(safe-area-inset-bottom);
+/*    margin-bottom: 100px;*/
+/*      padding-bottom: env(safe-area-inset-bottom);*/
+/*padding-bottom: 40px;*/
+    /*--size: 14em;
+    width: var(--size);
+    height: var(--size);*/
+  }
+
     </style>
 
 
-    <script type="module" crossorigin src="/assets/boxgame1/games-BaSJv1vR.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/cawad-regular-LUVKtMNm.js">
-    <link rel="modulepreload" crossorigin href="/assets/superneatlib-CH9wRX8J.js">
-    <link rel="stylesheet" crossorigin href="/assets/cawad-regular-B4dXqoSi.css">
-    <link rel="stylesheet" crossorigin href="/assets/superneatlib-DNv9E1ER.css">
   </head>
   <body>
 
     <div id="htmlcontent">
       <h1>Robotic Tacos<span>mini</span></h1>
-      <h4>controls: arrows & shift + wasd</h4>
+      <h4>controls: arrow keys</h4>
     </div>
+
+
+    <div id="joystickcontroller"></div>
 
     <!-- <h1>Robotic Tacos<span>mini</span></h1> -->
     <!-- <h1>SpiceyRobots</h1> -->
     <!-- <div id="app"></div> -->
     <!-- <script type="module" src="/src/main.js"></script> -->
 
+    <script type="module">
+
+            // import * as THREE from 'three';
+
+      import { gameData } from './gameData.js';
+
+      import { mount } from 'svelte';
+      import Joystick from "./components/Joystick.svelte";
+      const joystick = mount(Joystick, { 
+        target: document.getElementById("joystickcontroller"),
+        events: { joystickmove: function(ev) {
+          // console.log("ev b", ev?.detail?.position);
+          if(ev?.detail?.position){
+            gameData.joystickAxis.copy(ev.detail.position);
+          }
+        } } });
+
+      gameData.joystickController = joystick;
+
+
+      import {init} from './slidewalk.js';
+      function initB() {
+        init();
+      }
+
+      initB();
+
+      console.log("sldknldkfnglk")
+
+    </script>
 
   </body>
 </html>

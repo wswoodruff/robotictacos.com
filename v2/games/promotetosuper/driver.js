@@ -5,11 +5,17 @@
 
 // import { utilites } from 'superneatlib';
 
-import { Vector3, Quaternion, MathUtils, Euler } from 'three';
+import { Vector3, Vector2, Quaternion, MathUtils, Euler } from 'three';
 
 
 export class Driver{
 	
+    // keyboard, joystick
+    controllerType = "keyboard";
+    axis = new Vector2();
+    inverseAxis = false;
+    inverseKeys = false;
+
 
 	// Key states
 	keys = {
@@ -37,6 +43,7 @@ export class Driver{
 	speed = 0.02;
 
 	acceleration = new Vector3();
+    m_acceleration = new Vector3();
 	// gravity = new Vector3(0,-0.09,0);
 	gravity = new Vector3();
 
@@ -79,113 +86,113 @@ export class Driver{
         const _this = this;
 
         let delta = 0;
-        function __animate() {
-            // Render the scene
+//         function __animate() {
+//             // Render the scene
             
-            if(_this.enabled){
-            	_this.frameID = requestAnimationFrame(animate);
-            }
+//             if(_this.enabled){
+//             	_this.frameID = requestAnimationFrame(animate);
+//             }
 
-            const pawn = _this.targetObject;
-            const damping = _this.damping;
-            const vel = _this.velocity;
-            // const acc = _this.acceleration;
-            const speed = _this.speed;
-            const friction = _this.friction;
-            // const keys = _this.keys;
+//             const pawn = _this.targetObject;
+//             const damping = _this.damping;
+//             const vel = _this.velocity;
+//             // const acc = _this.acceleration;
+//             const speed = _this.speed;
+//             const friction = _this.friction;
+//             // const keys = _this.keys;
 
-            // Apply acceleration
-            if (_this.keys["ArrowLeft"]) vel.x -= speed;
-            if (_this.keys["ArrowRight"]) vel.x += speed;
-            if (_this.keys["ArrowUp"]) vel.z -= speed;
-            if (_this.keys["ArrowDown"]) vel.z += speed;
-            if (_this.keys["KeyW"]) vel.y += speed;
-            if (_this.keys["KeyS"]) vel.y -= speed;
+//             // Apply acceleration
+//             if (_this.keys["ArrowLeft"]) vel.x -= speed;
+//             if (_this.keys["ArrowRight"]) vel.x += speed;
+//             if (_this.keys["ArrowUp"]) vel.z -= speed;
+//             if (_this.keys["ArrowDown"]) vel.z += speed;
+//             if (_this.keys["KeyW"]) vel.y += speed;
+//             if (_this.keys["KeyS"]) vel.y -= speed;
 
-            // Apply friction when keys are not pressed
-			if (!_this.keys["ArrowLeft"] && !_this.keys["ArrowRight"]) vel.x *= friction;
-			if (!_this.keys["ArrowUp"] && !_this.keys["ArrowDown"]) vel.z *= friction;
-			if (!_this.keys["KeyW"] && !_this.keys["KeyS"]) vel.y *= friction;
+//             // Apply friction when keys are not pressed
+// 			if (!_this.keys["ArrowLeft"] && !_this.keys["ArrowRight"]) vel.x *= friction;
+// 			if (!_this.keys["ArrowUp"] && !_this.keys["ArrowDown"]) vel.z *= friction;
+// 			if (!_this.keys["KeyW"] && !_this.keys["KeyS"]) vel.y *= friction;
 
 
-            console.log("vel.z", vel.z)
-            // Apply easing (lerp to slow down)
-            pawn.position.x += (vel.x - pawn.position.x) * damping;
-            pawn.position.y += (vel.y - pawn.position.y) * damping;
-            pawn.position.z += (vel.z - pawn.position.z) * damping;
+//             console.log("vel.z", vel.z)
+//             // Apply easing (lerp to slow down)
+//             pawn.position.x += (vel.x - pawn.position.x) * damping;
+//             pawn.position.y += (vel.y - pawn.position.y) * damping;
+//             pawn.position.z += (vel.z - pawn.position.z) * damping;
 
 
             
-            delta += 0.1;
+//             delta += 0.1;
 
-            const bb = (vel.z - pawn.position.z) * damping;
-            // console.log("bb", bb)
+//             const bb = (vel.z - pawn.position.z) * damping;
+//             // console.log("bb", bb)
 
-            // pawn.rotation.z = Math.sin(delta) * Math.PI ;
+//             // pawn.rotation.z = Math.sin(delta) * Math.PI ;
 
-        // let t = (Math.sin(delta) + 1) / 2;  // Normalize sin from [-1,1] to [0,1]
-        // let t = (Math.sin(pawn.position.z*4.2) + 1) / 2;  // Normalize sin from [-1,1] to [0,1]
-        let t = (Math.sin(pawn.position.z) + 1) / 2;  // Normalize sin from [-1,1] to [0,1]
-        // let t = (Math.sin(delta) + 1) / 2;  // Normalize sin from [-1,1] to [0,1]
-	// 	const min = Math.PI*0.25;
-	// 	const max = 1-Math.PI*2*0.25;
-    // // let angle = min + (max - min) * t;
-    //             // pawn.rotation.x = angle;
-
-
-    //         // let tiltX = -vel.z * min; // Tilt forward/backward
-	// 		const angle = pawn.rotation.x + (-vel.z * 1.2 - pawn.rotation.x) * damping;
-    //         pawn.rotation.x = Math.min(min,Math.max(angle,max))
+//         // let t = (Math.sin(delta) + 1) / 2;  // Normalize sin from [-1,1] to [0,1]
+//         // let t = (Math.sin(pawn.position.z*4.2) + 1) / 2;  // Normalize sin from [-1,1] to [0,1]
+//         let t = (Math.sin(pawn.position.z) + 1) / 2;  // Normalize sin from [-1,1] to [0,1]
+//         // let t = (Math.sin(delta) + 1) / 2;  // Normalize sin from [-1,1] to [0,1]
+// 	// 	const min = Math.PI*0.25;
+// 	// 	const max = 1-Math.PI*2*0.25;
+//     // // let angle = min + (max - min) * t;
+//     //             // pawn.rotation.x = angle;
 
 
-// const min = Math.PI*0.25;
-// const max = -Math.PI*0.25;
-// const angle = pawn.rotation.x + (-vel.z - pawn.rotation.x) * damping;
-// pawn.rotation.x = Math.max(min,Math.min(angle,max))
+//     //         // let tiltX = -vel.z * min; // Tilt forward/backward
+// 	// 		const angle = pawn.rotation.x + (-vel.z * 1.2 - pawn.rotation.x) * damping;
+//     //         pawn.rotation.x = Math.min(min,Math.max(angle,max))
 
 
-								// const min = -Math.PI * 0.25; // Max backward tilt
-								// const max = Math.PI * 0.25;  // Max forward tilt
-								// const tiltSpeed = 2.5; // Increase speed of tilt response
-								// const targetAngle = -vel.z * tiltSpeed; // Tilt based on movement direction
-
-								// const returnSpeed = 0.1; // How fast it returns to zero
+// // const min = Math.PI*0.25;
+// // const max = -Math.PI*0.25;
+// // const angle = pawn.rotation.x + (-vel.z - pawn.rotation.x) * damping;
+// // pawn.rotation.x = Math.max(min,Math.min(angle,max))
 
 
-								// // pawn.rotation.x += (targetAngle - pawn.rotation.x) * damping; // Easing
-								// pawn.rotation.x += (targetAngle - pawn.rotation.x) * (damping * 2);
+// 								// const min = -Math.PI * 0.25; // Max backward tilt
+// 								// const max = Math.PI * 0.25;  // Max forward tilt
+// 								// const tiltSpeed = 2.5; // Increase speed of tilt response
+// 								// const targetAngle = -vel.z * tiltSpeed; // Tilt based on movement direction
 
-								// // Smoothly return to 0 tilt when velocity is small
-								// pawn.rotation.x *= (1 - returnSpeed);
-
-								// console.log("pawn.rotation.x", pawn.rotation.x)
-
-								// pawn.rotation.x = Math.max(min, Math.min(pawn.rotation.x, max)); // Clamp
+// 								// const returnSpeed = 0.1; // How fast it returns to zero
 
 
-const min = -Math.PI * 0.4; // More backward tilt
-const max = Math.PI * 0.4;  // More forward tilt
-const tiltSpeed = 2.5; // Speed of tilt response
-const returnSpeed = 0.1; // How fast it returns to zero
+// 								// // pawn.rotation.x += (targetAngle - pawn.rotation.x) * damping; // Easing
+// 								// pawn.rotation.x += (targetAngle - pawn.rotation.x) * (damping * 2);
 
-// Target angle based on movement, but easing back to zero when stopping
-const targetAngle = -vel.z * tiltSpeed;
-pawn.rotation.x += (targetAngle - pawn.rotation.x) * (damping * 1);
+// 								// // Smoothly return to 0 tilt when velocity is small
+// 								// pawn.rotation.x *= (1 - returnSpeed);
 
-// Slowly return to zero when not moving
-pawn.rotation.x *= (1 - returnSpeed);
+// 								// console.log("pawn.rotation.x", pawn.rotation.x)
 
-// Clamp tilt range
-pawn.rotation.x = Math.max(min, Math.min(pawn.rotation.x, max));
+// 								// pawn.rotation.x = Math.max(min, Math.min(pawn.rotation.x, max)); // Clamp
 
 
+// const min = -Math.PI * 0.4; // More backward tilt
+// const max = Math.PI * 0.4;  // More forward tilt
+// const tiltSpeed = 2.5; // Speed of tilt response
+// const returnSpeed = 0.1; // How fast it returns to zero
 
-            // const yy = utilites.remap(pawn.rotation.z, -1, 1, 0.5, 1.0);
-            // console.log("yy", yy)
-            // console.log("pawn.rotation.z", pawn.rotation.z)
+// // Target angle based on movement, but easing back to zero when stopping
+// const targetAngle = -vel.z * tiltSpeed;
+// pawn.rotation.x += (targetAngle - pawn.rotation.x) * (damping * 1);
 
-            // console.log("lskmlkdfm")
-        }
+// // Slowly return to zero when not moving
+// pawn.rotation.x *= (1 - returnSpeed);
+
+// // Clamp tilt range
+// pawn.rotation.x = Math.max(min, Math.min(pawn.rotation.x, max));
+
+
+
+//             // const yy = utilites.remap(pawn.rotation.z, -1, 1, 0.5, 1.0);
+//             // console.log("yy", yy)
+//             // console.log("pawn.rotation.z", pawn.rotation.z)
+
+//             // console.log("lskmlkdfm")
+//         }
             
 
 
@@ -224,13 +231,56 @@ pawn.rotation.x = Math.max(min, Math.min(pawn.rotation.x, max));
       acceleration.add(this.gravity);
 
 
+      // might need an invert option 
 
-           if (this.keys["ArrowLeft"]) acceleration.x -= speed;
-            if (this.keys["ArrowRight"]) acceleration.x += speed;
-            if (this.keys["ArrowUp"]) acceleration.z -= speed;
-            if (this.keys["ArrowDown"]) acceleration.z += speed;
+        const axis = this.axis;
+
+
+           if (this.keys["ArrowLeft"]) axis.x = -1;
+            if (this.keys["ArrowRight"]) axis.x = 1;
+            if (this.keys["ArrowUp"]) axis.y = 1;
+            if (this.keys["ArrowDown"]) axis.y = -1;
+            // if (this.keys["KeyW"]) 
+            // if (this.keys["KeyS"]) 
+            axis.x *= -1;
+
             if (this.keys["KeyW"]) acceleration.y += speed;
-            if (this.keys["KeyS"]) acceleration.y -= speed;
+            if (this.keys["KeyS"]) acceleration.y -= speed; 
+
+
+            if (this.inverseAxis) {
+                axis.x *= -1;
+                axis.y *= -1;
+            }
+
+            acceleration.x += speed * axis.x;
+            acceleration.z += speed * axis.y;
+
+            // console.log("axis", axis);
+
+            // if (this.controllerType) {
+
+            //    if (this.keys["ArrowLeft"]) acceleration.x += speed;
+            //     if (this.keys["ArrowRight"]) acceleration.x -= speed;
+            //     if (this.keys["ArrowUp"]) acceleration.z += speed;
+            //     if (this.keys["ArrowDown"]) acceleration.z -= speed;
+            //     if (this.keys["KeyW"]) acceleration.y += speed;
+            //     if (this.keys["KeyS"]) acceleration.y -= speed;
+
+
+            // }
+
+           // if (this.keys["ArrowLeft"]) acceleration.x += speed;
+           //  if (this.keys["ArrowRight"]) acceleration.x -= speed;
+           //  if (this.keys["ArrowUp"]) acceleration.z += speed;
+           //  if (this.keys["ArrowDown"]) acceleration.z -= speed;
+           //  if (this.keys["KeyW"]) acceleration.y += speed;
+           //  if (this.keys["KeyS"]) acceleration.y -= speed;
+
+
+
+
+
 
       // Apply user-controlled forces (key movements)
       // if (this.keys['w']) acceleration.z -= speed; // Move forward
@@ -245,10 +295,18 @@ pawn.rotation.x = Math.max(min, Math.min(pawn.rotation.x, max));
       // velocity.multiplyScalar(friction); // Simulate friction (reduce speed over time)
       // velocity.subScalar(friction); // Simulate friction (reduce speed over time)
       
-      velocity.multiplyScalar(damping); // Simulate friction (reduce speed over time)
 
-      // Update velocity with acceleration
+      // putting dampen before add makes more jelly
+        //  and inversely makes it more stop and go
+      velocity.multiplyScalar(damping); // Simulate friction (reduce speed over time)
+      
       velocity.add(acceleration);
+
+      // console.log("acceleration", acceleration.toArray())
+
+      // this does nothing, just an api to read from
+      // _this.m_acceleration.copy(_this.acceleration);
+
       acceleration.set(0, 0, 0); // Reset acceleration after applying
 
       // Update position with velocity
@@ -365,6 +423,14 @@ pawn.rotation.x = Math.max(min, Math.min(pawn.rotation.x, max));
 
 	keyUpEvents(ev){
 	    if (this.keys.hasOwnProperty(ev.code)) this.keys[ev.code] = false;
+        // does a quick reset of axis, though will fight with joystick
+        let count = 0;
+        for (var i = 0; i < this.keys.length; i++) {
+            if (this.keys[i] === true) count++;
+        }
+        if(count === 0){
+            this.axis.set(0,0);
+        }
 	}
 
 }
